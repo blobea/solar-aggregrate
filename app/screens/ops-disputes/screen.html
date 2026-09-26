@@ -1,0 +1,59 @@
+<div>
+  <div class="page-head">
+    <h1>Disputes</h1>
+    <p>Look at the review, the vendor's ground and the evidence. Decide: <strong>removed</strong>, <strong>annotated</strong> (context shown publicly) or <strong>stands</strong>. Reviews stay visible until you decide.</p>
+  </div>
+  <div class="tabs" role="tablist">
+    <button type="button" role="tab" :aria-selected="tab === 'open'" @click="tab = 'open'" x-text="`Open (${open.length})`"></button>
+    <button type="button" role="tab" :aria-selected="tab === 'closed'" @click="tab = 'closed'" x-text="`Resolved (${closed.length})`"></button>
+  </div>
+  <template x-if="!shown.length"><div class="empty">Nothing here.</div></template>
+  <div class="stack">
+    <template x-for="r in shown" :key="r.id">
+      <article class="card stack-sm" data-testid="dispute">
+        <div class="row-between">
+          <div><strong x-text="r.vendorName"></strong> <span class="small muted" x-text="`· review by ${r.customerName} · ${milestoneLabel(r.milestone)} · ${date(r.createdAt)}`"></span></div>
+          <span class="badge" :class="r.dispute.outcome === 'open' ? 'badge-amber' : 'badge-primary'" x-text="r.dispute.outcome"></span>
+        </div>
+        <div class="two-col">
+          <div class="stack-sm">
+            <h3 style="margin:0">Review</h3>
+            <div class="dim-scores"><template x-for="(s, d) in r.scores" :key="d"><span x-text="`${dimLabel(d)}: ${s}` + (r.reasons?.[d] ? ` (${reasonLabel(r.reasons[d])})` : '')"></span></template></div>
+            <p class="small" style="margin:0" x-text="r.text || '(no text)'"></p>
+            <div class="small" x-show="r.evidence" x-text="`Customer evidence: ${r.evidence}`"></div>
+            <div class="vendor-reply" x-show="r.reply" x-text="`Vendor public reply: ${r.reply?.text}`"></div>
+          </div>
+          <div class="stack-sm">
+            <h3 style="margin:0">Vendor's dispute</h3>
+            <div><span class="badge badge-red" x-text="groundLabel(r.dispute.ground)"></span> <span class="small muted" x-text="dateTime(r.dispute.raisedAt)"></span></div>
+            <p class="small" style="margin:0" x-text="r.dispute.note || '(no note)'"></p>
+            <template x-if="r.lead">
+              <dl class="kv">
+                <dt>Request</dt><dd x-text="r.lead.status"></dd>
+                <dt>Estimate shown</dt><dd x-text="inr(r.lead.estimate.net)"></dd>
+                <dt>Final quote</dt><dd x-text="r.lead.finalQuote ? `${inr(r.lead.finalQuote.amount)} (${dev(r.lead)})` : '—'"></dd>
+                <dt>Invoice</dt><dd x-text="r.lead.invoiceNo || '—'"></dd>
+              </dl>
+            </template>
+            <p class="small muted" x-show="!r.lead" style="margin:0">Seeded review — no linked request in this demo.</p>
+          </div>
+        </div>
+        <template x-if="r.dispute.outcome === 'open'">
+          <form class="stack-sm" @submit.prevent="resolve(r.id)" style="border-top:1px solid var(--c-border);padding-top:12px">
+            <fieldset style="margin:0">
+              <legend>Decision</legend>
+              <div class="seg">
+                <template x-for="o in outcomes" :key="o"><label><input type="radio" :name="'o-' + r.id" :value="o" x-model="form[r.id].outcome" :data-testid="`outcome-${o}`" /><span x-text="o"></span></label></template>
+              </div>
+            </fieldset>
+            <label :for="'note-' + r.id">Note (recorded; shown publicly if annotated)</label>
+            <textarea :id="'note-' + r.id" x-model="form[r.id].note" data-testid="ops-note"></textarea>
+            <div class="error-text" x-show="form[r.id].error" x-text="form[r.id].error"></div>
+            <button class="btn btn-primary" type="submit" data-testid="resolve-dispute">Record decision</button>
+          </form>
+        </template>
+        <div class="ops-note" x-show="r.dispute.outcome !== 'open'" x-text="`Decision: ${r.dispute.outcome} — ${r.dispute.opsNote || ''} (${dateTime(r.dispute.resolvedAt)})`"></div>
+      </article>
+    </template>
+  </div>
+</div>

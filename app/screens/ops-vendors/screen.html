@@ -1,0 +1,29 @@
+<div>
+  <div class="page-head">
+    <h1>Vendors</h1>
+    <p>Vetting status and objective metrics. Suspended vendors don't appear in customer results.</p>
+  </div>
+  <div class="table-wrap">
+    <table class="table">
+      <thead><tr><th>Vendor</th><th>Vetting</th><th>Price sheet</th><th>Accuracy</th><th class="num">Rating</th><th>Registration</th><th>Actions</th></tr></thead>
+      <tbody>
+        <template x-for="v in list" :key="v.id">
+          <tr>
+            <td><a :href="`#/vendors/${v.id}`" x-text="v.name"></a><div class="small muted" x-show="v.sponsored">Sponsored-slot buyer</div></td>
+            <td><span class="badge" :class="{ 'badge-green': v.vetting === 'approved', 'badge-amber': v.vetting === 'pending', 'badge-red': v.vetting === 'suspended' }" x-text="v.vetting"></span></td>
+            <td class="small"><span :style="v.metrics.stale ? 'color:var(--c-warning);font-weight:600' : ''" x-text="v.metrics.stale ? 'Expired' : 'Current'"></span><br /><span class="muted" x-text="`v${v.metrics.sheetVersion} · ${daysAgo(v.metrics.updatedDaysAgo)}`"></span></td>
+            <td><span class="badge" :class="badgeClass(v.metrics.accuracy.badge)" x-text="v.metrics.accuracy.label"></span></td>
+            <td class="num" x-text="`${v.metrics.rating.toFixed(2)} (${v.metrics.ratingCount})`"></td>
+            <td class="small mono" x-text="v.mnreRegNo"></td>
+            <td>
+              <div class="row" style="gap:6px;flex-wrap:nowrap">
+                <button class="btn btn-sm" type="button" x-show="v.vetting !== 'approved'" @click="set(v.id, 'approved')">Approve</button>
+                <button class="btn btn-sm btn-ghost" type="button" x-show="v.vetting !== 'suspended'" @click="set(v.id, 'suspended')">Suspend</button>
+              </div>
+            </td>
+          </tr>
+        </template>
+      </tbody>
+    </table>
+  </div>
+</div>

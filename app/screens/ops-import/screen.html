@@ -1,0 +1,44 @@
+<div>
+  <div class="page-head">
+    <h1>Import a price sheet</h1>
+    <p>Upload a vendor's Excel sheet on their behalf. We flag any ₹/kW rate more than 30% away from the city median for that slab and tier.</p>
+  </div>
+  <div class="card stack-sm" style="margin-bottom:16px">
+    <div class="row" style="align-items:end">
+      <div class="field" style="margin:0;flex:1 1 220px">
+        <label for="vendor">Vendor</label>
+        <select id="vendor" x-model="vendorId" @change="loadVendor()">
+          <template x-for="v in $store.app.vendors" :key="v.id"><option :value="v.id" x-text="v.name" :selected="v.id === vendorId"></option></template>
+        </select>
+      </div>
+      <button class="btn" type="button" @click="template_()">Download current sheet as template</button>
+      <label class="btn btn-primary" style="margin:0">Upload Excel<input type="file" accept=".xlsx,.xls" class="sr-only" @change="upload($event)" data-testid="ops-upload" /></label>
+    </div>
+    <p class="small muted" style="margin:0" x-text="loaded ? `Loaded ${fileName}. Review the highlighted cells, then save.` : 'Nothing uploaded yet. The grids show the vendor\'s current sheet.'"></p>
+  </div>
+
+  <div class="alert alert-danger stack-sm" x-show="errors.length" role="alert" style="margin-bottom:16px">
+    <strong x-text="`${errors.length} validation error(s) — cannot save until fixed:`"></strong>
+    <ul class="errors-list small" style="margin:0;padding-left:18px"><template x-for="(e, i) in errors" :key="i"><li x-text="`${excelCell(e)}: ${e.message}`"></li></template></ul>
+  </div>
+  <div class="alert alert-warn stack-sm" x-show="flags.length" style="margin-bottom:16px">
+    <strong x-text="`Sanity check: ${flags.length} rate(s) more than 30% from the city median`"></strong>
+    <ul class="small" style="margin:0;padding-left:18px"><template x-for="(f, i) in flags" :key="i"><li x-text="`${f.packageId} (${f.tier}) ${f.slab} kW: ₹${f.rate.toLocaleString('en-IN')}/kW vs median ₹${f.median.toLocaleString('en-IN')} (${f.deviationPct > 0 ? '+' : ''}${f.deviationPct}%)`"></li></template></ul>
+  </div>
+  <div class="alert alert-success" x-show="loaded && !errors.length && !flags.length" style="margin-bottom:16px">All checks passed.</div>
+
+  <section class="stack-sm"><h2 style="margin:0">Packages</h2><div class="grid-host" x-ref="packages"></div></section>
+  <div class="two-col" style="margin-top:24px">
+    <section class="stack-sm"><h2 style="margin:0">Structure</h2><div class="grid-host" x-ref="structure"></div></section>
+    <section class="stack-sm"><h2 style="margin:0">Site</h2><div class="grid-host" x-ref="site"></div></section>
+    <section class="stack-sm"><h2 style="margin:0">Fixed</h2><div class="grid-host" x-ref="fixed"></div></section>
+    <section class="stack-sm"><h2 style="margin:0">Add-ons</h2><div class="grid-host" x-ref="addOns"></div></section>
+    <section class="stack-sm"><h2 style="margin:0">Terms</h2><div class="grid-host" x-ref="terms"></div></section>
+  </div>
+  <div class="tray">
+    <div class="row-between">
+      <button class="btn" type="button" @click="check()">Re-check</button>
+      <button class="btn btn-primary" type="button" @click="save()">Save for vendor (new version)</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,56 @@
+<div style="max-width:760px">
+  <div class="page-head">
+    <h1>City rules — Bengaluru (BESCOM)</h1>
+    <p>These drive sizing, savings and the subsidy for every estimate. Changes apply to new estimates only; logged estimates are never edited.</p>
+  </div>
+  <template x-if="r">
+    <form class="stack" @submit.prevent="save()" novalidate>
+      <section class="card">
+        <h2 class="card-title" style="margin-bottom:12px">Generation & sizing</h2>
+        <div class="grid-2">
+          <div class="field"><label for="yield">Yield (units / kW / day)</label><input id="yield" type="number" step="0.1" x-model.number="r.yieldPerKwDay" :aria-invalid="!!e.yieldPerKwDay" /><div class="error-text" x-text="e.yieldPerKwDay"></div></div>
+          <div class="field"><label for="area">Roof area per kW (m²)</label><input id="area" type="number" step="0.1" x-model.number="r.areaPerKwSqm" :aria-invalid="!!e.areaPerKwSqm" /><div class="error-text" x-text="e.areaPerKwSqm"></div></div>
+          <div class="field"><label for="deg">Panel degradation (%/yr)</label><input id="deg" type="number" step="0.1" x-model.number="r.degradationPct" /></div>
+        </div>
+      </section>
+      <section class="card">
+        <h2 class="card-title" style="margin-bottom:12px">Tariff slabs (energy charge)</h2>
+        <div class="table-wrap">
+          <table class="table">
+            <thead><tr><th>From (units)</th><th>Up to (units)</th><th>₹ / unit</th><th></th></tr></thead>
+            <tbody>
+              <template x-for="(s, i) in r.tariff.slabs" :key="i">
+                <tr>
+                  <td class="num" x-text="i === 0 ? 0 : (r.tariff.slabs[i - 1].upTo ?? 0) + 1"></td>
+                  <td>
+                    <label class="sr-only" :for="'up' + i">Up to</label>
+                    <input :id="'up' + i" type="number" x-show="i < r.tariff.slabs.length - 1" x-model.number="s.upTo" />
+                    <span x-show="i === r.tariff.slabs.length - 1">and above</span>
+                  </td>
+                  <td><label class="sr-only" :for="'rate' + i">Rate</label><input :id="'rate' + i" type="number" step="0.05" x-model.number="s.rate" :aria-invalid="!!e['slab' + i]" /><div class="error-text" x-text="e['slab' + i]"></div></td>
+                  <td><button class="btn btn-sm btn-ghost" type="button" x-show="r.tariff.slabs.length > 1" @click="removeSlab(i)" :aria-label="`Remove slab ${i + 1}`">✕</button></td>
+                </tr>
+              </template>
+            </tbody>
+          </table>
+        </div>
+        <div class="row" style="margin-top:8px"><button class="btn btn-sm" type="button" @click="addSlab()">+ Slab</button></div>
+        <div class="grid-2" style="margin-top:12px">
+          <div class="field"><label for="exp">Net-metering export rate (₹/unit)</label><input id="exp" type="number" step="0.01" x-model.number="r.tariff.exportRate" :aria-invalid="!!e.exportRate" /><div class="error-text" x-text="e.exportRate"></div></div>
+          <div class="field"><label for="fc">Fixed charge (₹/kW/month)</label><input id="fc" type="number" x-model.number="r.tariff.fixedChargePerKw" /></div>
+        </div>
+      </section>
+      <section class="card">
+        <h2 class="card-title" style="margin-bottom:12px">Subsidy (computed by the platform)</h2>
+        <div class="grid-2">
+          <div class="field"><label for="s1">₹ per kW, first 2 kW</label><input id="s1" type="number" x-model.number="r.subsidy.perKwFirst2" :aria-invalid="!!e.perKwFirst2" /><div class="error-text" x-text="e.perKwFirst2"></div></div>
+          <div class="field"><label for="s3">₹ for the 3rd kW</label><input id="s3" type="number" x-model.number="r.subsidy.thirdKw" :aria-invalid="!!e.thirdKw" /><div class="error-text" x-text="e.thirdKw"></div></div>
+          <div class="field"><label for="cap">Cap (₹)</label><input id="cap" type="number" x-model.number="r.subsidy.cap" :aria-invalid="!!e.cap" /><div class="error-text" x-text="e.cap"></div></div>
+          <label class="check" style="align-self:center"><input type="checkbox" x-model="r.subsidy.requiresDcr" /> Requires DCR panels</label>
+        </div>
+      </section>
+      <div class="alert alert-danger" x-show="Object.keys(e).length" role="alert">Fix the highlighted fields.</div>
+      <div class="row"><button class="btn btn-primary" type="submit">Save city rules</button><button class="btn" type="button" @click="init()">Discard changes</button></div>
+    </form>
+  </template>
+</div>

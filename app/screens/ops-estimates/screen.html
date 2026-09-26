@@ -1,0 +1,32 @@
+<div>
+  <div class="page-head">
+    <h1>Estimates log</h1>
+    <p>Every estimate shown to a customer, exactly as shown. Read-only: entries are appended and never edited.</p>
+  </div>
+  <div class="toolbar" style="margin-top:0">
+    <div class="field"><label for="q">Search</label><input id="q" type="search" x-model="q" placeholder="Customer, vendor, pincode…" /></div>
+    <p class="small muted" style="margin:0 0 10px" x-text="`${filtered.length} of ${list.length} entries`"></p>
+  </div>
+  <div class="table-wrap">
+    <table class="table" data-testid="estimates-log">
+      <thead><tr><th>Shown at</th><th>Customer</th><th>Vendor</th><th>Pincode</th><th class="num">kW</th><th>Sheet</th><th class="num">Gross</th><th class="num">Subsidy</th><th class="num">Net</th><th class="num">Range</th></tr></thead>
+      <tbody>
+        <template x-for="e in page" :key="e.id">
+          <tr>
+            <td class="nowrap" x-text="dateTime(e.at)"></td>
+            <td x-text="e.customerName || e.phone || 'anonymous'"></td>
+            <td x-text="e.vendorName"></td>
+            <td x-text="e.pincode"></td>
+            <td class="num" x-text="e.kw"></td>
+            <td x-text="`v${e.sheetVersion}`"></td>
+            <td class="num" x-text="inr(e.gross)"></td>
+            <td class="num" x-text="inr(e.subsidy)"></td>
+            <td class="num" x-text="inr(e.net)"></td>
+            <td class="num nowrap" x-text="lakhRange(e.low, e.high)"></td>
+          </tr>
+        </template>
+      </tbody>
+    </table>
+  </div>
+  <div class="row" style="margin-top:12px" x-show="filtered.length > limit"><button class="btn btn-sm" type="button" @click="limit += 50">Show more</button></div>
+</div>

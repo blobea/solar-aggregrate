@@ -45,7 +45,7 @@
     "id": "v-vayu", "name": "Vayu Renewables", "tagline": "Large homes and apartments",
     "basePincode": "560066", "since": 2015, "teamSize": 40, "installsCompleted": 690,
     "mnreRegNo": "MNRE-DEMO-KA-0333", "gstin": "29DEMO0333V1Z6", "phone": "+91 90000 10333",
-    "vetting": "approved", "sponsored": false, "languages": ["English", "Hindi", "Malayalam"],
+    "vetting": "pending", "sponsored": false, "languages": ["English", "Hindi", "Malayalam"],
     "about": "Focus on 5 kW+ systems for villas, apartments and small commercial rooftops."
   },
   {
