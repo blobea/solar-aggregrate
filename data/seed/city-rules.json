@@ -1,0 +1,37 @@
+{
+  "city": "Bangalore",
+  "discom": "BESCOM",
+  "yieldPerKwDay": 4.2,
+  "areaPerKwSqm": 6.5,
+  "minKw": 1,
+  "tariff": {
+    "slabs": [
+      { "upTo": 200, "rate": 5.9 },
+      { "upTo": 500, "rate": 7.2 },
+      { "upTo": null, "rate": 7.85 }
+    ],
+    "fixedChargePerKw": 145,
+    "exportRate": 3.86
+  },
+  "subsidy": { "perKwFirst2": 30000, "thirdKw": 18000, "cap": 78000, "requiresDcr": true },
+  "netMeteringDefaults": { "applicationFee": 1000, "meterCost": 4500, "inspectionFee": 500 },
+  "degradationPct": 0.5,
+  "lifetimeYears": 25,
+  "pincodes": [
+    { "pincode": "560102", "area": "HSR Layout", "lat": 12.9116, "lng": 77.6389 },
+    { "pincode": "560034", "area": "Koramangala", "lat": 12.9352, "lng": 77.6245 },
+    { "pincode": "560103", "area": "Bellandur", "lat": 12.9304, "lng": 77.6784 },
+    { "pincode": "560066", "area": "Whitefield", "lat": 12.9698, "lng": 77.75 },
+    { "pincode": "560037", "area": "Marathahalli", "lat": 12.9569, "lng": 77.7011 },
+    { "pincode": "560100", "area": "Electronic City", "lat": 12.8452, "lng": 77.6602 },
+    { "pincode": "560076", "area": "Bannerghatta Road", "lat": 12.8876, "lng": 77.5973 },
+    { "pincode": "560078", "area": "JP Nagar", "lat": 12.9063, "lng": 77.5857 },
+    { "pincode": "560011", "area": "Jayanagar", "lat": 12.925, "lng": 77.5938 },
+    { "pincode": "560085", "area": "Banashankari", "lat": 12.9255, "lng": 77.5468 },
+    { "pincode": "560010", "area": "Rajajinagar", "lat": 12.991, "lng": 77.5525 },
+    { "pincode": "560003", "area": "Malleshwaram", "lat": 13.0035, "lng": 77.5709 },
+    { "pincode": "560024", "area": "Hebbal", "lat": 13.0358, "lng": 77.597 },
+    { "pincode": "560092", "area": "Sahakara Nagar", "lat": 13.062, "lng": 77.585 },
+    { "pincode": "560064", "area": "Yelahanka", "lat": 13.1007, "lng": 77.5963 }
+  ]
+}

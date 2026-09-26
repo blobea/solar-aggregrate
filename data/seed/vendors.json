@@ -1,0 +1,58 @@
+[
+  {
+    "id": "v-suryakiran", "name": "SuryaKiran Rooftops", "tagline": "Lowest upfront price in South Bangalore",
+    "basePincode": "560078", "since": 2019, "teamSize": 14, "installsCompleted": 410,
+    "mnreRegNo": "MNRE-DEMO-KA-1041", "gstin": "29DEMO1041K1Z1", "phone": "+91 90000 10041",
+    "vetting": "approved", "sponsored": false, "languages": ["English", "Kannada", "Tamil"],
+    "about": "High-volume installer focused on economy and standard systems for independent houses."
+  },
+  {
+    "id": "v-nimbus", "name": "Nimbus Solar Works", "tagline": "Premium components, engineered installs",
+    "basePincode": "560034", "since": 2014, "teamSize": 32, "installsCompleted": 1280,
+    "mnreRegNo": "MNRE-DEMO-KA-0217", "gstin": "29DEMO0217N1Z4", "phone": "+91 90000 10217",
+    "vetting": "approved", "sponsored": false, "languages": ["English", "Kannada", "Hindi"],
+    "about": "Engineering-led team with in-house structural design. Known for quotes that match the final bill."
+  },
+  {
+    "id": "v-greengrid", "name": "GreenGrid Energy", "tagline": "Solar + EV charging specialists",
+    "basePincode": "560103", "since": 2017, "teamSize": 22, "installsCompleted": 760,
+    "mnreRegNo": "MNRE-DEMO-KA-0588", "gstin": "29DEMO0588G1Z7", "phone": "+91 90000 10588",
+    "vetting": "approved", "sponsored": true, "languages": ["English", "Kannada", "Telugu"],
+    "about": "Balanced pricing with a strong focus on EV charger integration and app-based monitoring."
+  },
+  {
+    "id": "v-bluepeak", "name": "BluePeak Power", "tagline": "New team, experienced engineers",
+    "basePincode": "560037", "since": 2026, "teamSize": 6, "installsCompleted": 12,
+    "mnreRegNo": "MNRE-DEMO-KA-2210", "gstin": "29DEMO2210B1Z2", "phone": "+91 90000 12210",
+    "vetting": "approved", "sponsored": false, "languages": ["English", "Hindi"],
+    "about": "Recently listed. Founders previously led installs at a large EPC firm."
+  },
+  {
+    "id": "v-arka", "name": "Arka Sun Systems", "tagline": "Family-run since 2012",
+    "basePincode": "560011", "since": 2012, "teamSize": 18, "installsCompleted": 930,
+    "mnreRegNo": "MNRE-DEMO-KA-0102", "gstin": "29DEMO0102A1Z9", "phone": "+91 90000 10102",
+    "vetting": "approved", "sponsored": false, "languages": ["English", "Kannada"],
+    "about": "Long-standing local installer. Price sheet has not been refreshed recently."
+  },
+  {
+    "id": "v-deccan", "name": "Deccan Solar Co.", "tagline": "North Bangalore's rooftop team",
+    "basePincode": "560092", "since": 2016, "teamSize": 15, "installsCompleted": 520,
+    "mnreRegNo": "MNRE-DEMO-KA-0461", "gstin": "29DEMO0461D1Z3", "phone": "+91 90000 10461",
+    "vetting": "approved", "sponsored": false, "languages": ["English", "Kannada", "Urdu"],
+    "about": "Serves Hebbal, Yelahanka, Sahakara Nagar and nearby areas; 3 kW and above."
+  },
+  {
+    "id": "v-vayu", "name": "Vayu Renewables", "tagline": "Large homes and apartments",
+    "basePincode": "560066", "since": 2015, "teamSize": 40, "installsCompleted": 690,
+    "mnreRegNo": "MNRE-DEMO-KA-0333", "gstin": "29DEMO0333V1Z6", "phone": "+91 90000 10333",
+    "vetting": "approved", "sponsored": false, "languages": ["English", "Hindi", "Malayalam"],
+    "about": "Focus on 5 kW+ systems for villas, apartments and small commercial rooftops."
+  },
+  {
+    "id": "v-sahyadri", "name": "Sahyadri Solar", "tagline": "Every tier, every budget",
+    "basePincode": "560085", "since": 2018, "teamSize": 20, "installsCompleted": 610,
+    "mnreRegNo": "MNRE-DEMO-KA-0719", "gstin": "29DEMO0719S1Z8", "phone": "+91 90000 10719",
+    "vetting": "approved", "sponsored": false, "languages": ["English", "Kannada", "Marathi"],
+    "about": "Offers economy, standard and premium packages across most of the city."
+  }
+]

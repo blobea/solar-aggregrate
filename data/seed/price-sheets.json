@@ -1,0 +1,441 @@
+[
+  {
+    "vendorId": "v-suryakiran",
+    "version": 1,
+    "updatedAt": "@-12d",
+    "packages": [
+      {
+        "id": "sk-eco-dcr",
+        "name": "Saver DCR",
+        "tier": "economy",
+        "dcr": true,
+        "panelId": "pn-heliora-540d",
+        "inverterId": "inv-sparq-s",
+        "ratesPerKw": { "1-3": 58500, "3-5": 45000, "5-10": 41500, "10-25": 38500 }
+      },
+      {
+        "id": "sk-eco",
+        "name": "Saver",
+        "tier": "economy",
+        "dcr": false,
+        "panelId": "pn-heliora-550",
+        "inverterId": "inv-sparq-s",
+        "ratesPerKw": { "1-3": 54000, "3-5": 42000, "5-10": 39000, "10-25": 36500 }
+      },
+      {
+        "id": "sk-std-dcr",
+        "name": "Smart DCR",
+        "tier": "standard",
+        "dcr": true,
+        "panelId": "pn-lumenra-575d",
+        "inverterId": "inv-sparq-s",
+        "ratesPerKw": { "1-3": 61000, "3-5": 47500, "5-10": 44000, "10-25": 41000 }
+      },
+      {
+        "id": "sk-std",
+        "name": "Smart",
+        "tier": "standard",
+        "dcr": false,
+        "panelId": "pn-lumenra-580",
+        "inverterId": "inv-sparq-s",
+        "ratesPerKw": { "1-3": 57000, "3-5": 44500, "5-10": 41500, "10-25": 38500 }
+      },
+      {
+        "id": "sk-std-hyb",
+        "name": "Smart Hybrid DCR",
+        "tier": "standard",
+        "dcr": true,
+        "panelId": "pn-lumenra-575d",
+        "inverterId": "inv-ohmix-h",
+        "ratesPerKw": { "1-3": 69000, "3-5": 54000, "5-10": 50000, "10-25": 47000 }
+      }
+    ],
+    "structure": { "rcc": { "standard": 2500, "elevated_6ft": 6500, "elevated_10ft": 9500 }, "sheet": { "standard": 1700, "elevated_6ft": 5700, "elevated_10ft": 8700 }, "tile": { "standard": 3500, "elevated_6ft": 7500, "elevated_10ft": 10500 } },
+    "site": { "perFloorAbove2": 2000, "freeRadiusKm": 12, "perKmBeyond": 40 },
+    "fixed": { "netMeterFee": 5000, "paperwork": 2500, "transport": 2000 },
+    "addOns": {
+      "batteryPerKwh": 28000,
+      "evCharger": { "3.3": 28000, "7.4": 48000 },
+      "monitoring": 2500,
+      "amcPerYear": 3000
+    },
+    "terms": { "workmanshipWarrantyYears": 3, "paymentMilestones": "50% advance / 50% on installation", "validUntil": "@+45d", "tolerancePct": 12 },
+    "availability": { "pn-heliora-540d": { "status": "in_stock", "leadTimeDays": 7 }, "pn-heliora-550": { "status": "in_stock", "leadTimeDays": 7 }, "pn-lumenra-575d": { "status": "in_stock", "leadTimeDays": 7 }, "pn-lumenra-580": { "status": "in_stock", "leadTimeDays": 7 }, "pn-viraj-600d": { "status": "in_stock", "leadTimeDays": 7 }, "pn-astracell-445": { "status": "in_stock", "leadTimeDays": 7 }, "inv-sparq-s": { "status": "in_stock", "leadTimeDays": 7 }, "inv-ohmix-g": { "status": "in_stock", "leadTimeDays": 7 }, "inv-ohmix-h": { "status": "in_stock", "leadTimeDays": 7 }, "inv-tarang-p": { "status": "unavailable", "leadTimeDays": 0 }, "inv-tarang-h": { "status": "unavailable", "leadTimeDays": 0 }, "bat-kosha-5": { "status": "in_stock", "leadTimeDays": 14 }, "bat-kosha-10": { "status": "in_stock", "leadTimeDays": 14 }, "bat-nidhi-10": { "status": "in_stock", "leadTimeDays": 14 }, "ev-charjo-3": { "status": "in_stock", "leadTimeDays": 7 }, "ev-charjo-7": { "status": "in_stock", "leadTimeDays": 7 } },
+    "servicePincodes": ["560102", "560034", "560103", "560100", "560076", "560078", "560011", "560085", "560037", "560066"],
+    "kwRange": [1, 10]
+  },
+  {
+    "vendorId": "v-nimbus",
+    "version": 1,
+    "updatedAt": "@-4d",
+    "packages": [
+      {
+        "id": "nb-std-dcr",
+        "name": "Assured DCR",
+        "tier": "standard",
+        "dcr": true,
+        "panelId": "pn-lumenra-575d",
+        "inverterId": "inv-tarang-p",
+        "ratesPerKw": { "1-3": 68000, "3-5": 53500, "5-10": 49500, "10-25": 46000 }
+      },
+      {
+        "id": "nb-std-hyb",
+        "name": "Assured Hybrid DCR",
+        "tier": "standard",
+        "dcr": true,
+        "panelId": "pn-lumenra-575d",
+        "inverterId": "inv-tarang-h",
+        "ratesPerKw": { "1-3": 75000, "3-5": 59000, "5-10": 55000, "10-25": 51500 }
+      },
+      {
+        "id": "nb-pre-dcr",
+        "name": "Signature DCR",
+        "tier": "premium",
+        "dcr": true,
+        "panelId": "pn-viraj-600d",
+        "inverterId": "inv-tarang-p",
+        "ratesPerKw": { "1-3": 74000, "3-5": 58000, "5-10": 54000, "10-25": 50000 }
+      },
+      {
+        "id": "nb-pre",
+        "name": "Signature HJT",
+        "tier": "premium",
+        "dcr": false,
+        "panelId": "pn-astracell-445",
+        "inverterId": "inv-tarang-p",
+        "ratesPerKw": { "1-3": 78000, "3-5": 61000, "5-10": 57000, "10-25": 53000 }
+      }
+    ],
+    "structure": { "rcc": { "standard": 3500, "elevated_6ft": 7500, "elevated_10ft": 10500 }, "sheet": { "standard": 2700, "elevated_6ft": 6700, "elevated_10ft": 9700 }, "tile": { "standard": 4500, "elevated_6ft": 8500, "elevated_10ft": 11500 } },
+    "site": { "perFloorAbove2": 3000, "freeRadiusKm": 20, "perKmBeyond": 60 },
+    "fixed": { "netMeterFee": 7000, "paperwork": 4000, "transport": 3000 },
+    "addOns": {
+      "batteryPerKwh": 33000,
+      "evCharger": { "3.3": 34000, "7.4": 58000 },
+      "monitoring": 0,
+      "amcPerYear": 5500
+    },
+    "terms": { "workmanshipWarrantyYears": 10, "paymentMilestones": "20% booking / 70% on delivery / 10% on commissioning", "validUntil": "@+80d", "tolerancePct": 5 },
+    "availability": { "pn-heliora-540d": { "status": "in_stock", "leadTimeDays": 7 }, "pn-heliora-550": { "status": "in_stock", "leadTimeDays": 7 }, "pn-lumenra-575d": { "status": "in_stock", "leadTimeDays": 7 }, "pn-lumenra-580": { "status": "in_stock", "leadTimeDays": 7 }, "pn-viraj-600d": { "status": "in_stock", "leadTimeDays": 7 }, "pn-astracell-445": { "status": "on_order", "leadTimeDays": 28 }, "inv-sparq-s": { "status": "in_stock", "leadTimeDays": 7 }, "inv-ohmix-g": { "status": "in_stock", "leadTimeDays": 7 }, "inv-ohmix-h": { "status": "in_stock", "leadTimeDays": 7 }, "inv-tarang-p": { "status": "in_stock", "leadTimeDays": 7 }, "inv-tarang-h": { "status": "in_stock", "leadTimeDays": 7 }, "bat-kosha-5": { "status": "in_stock", "leadTimeDays": 14 }, "bat-kosha-10": { "status": "in_stock", "leadTimeDays": 14 }, "bat-nidhi-10": { "status": "in_stock", "leadTimeDays": 14 }, "ev-charjo-3": { "status": "in_stock", "leadTimeDays": 7 }, "ev-charjo-7": { "status": "in_stock", "leadTimeDays": 7 } },
+    "servicePincodes": ["560102", "560034", "560103", "560066", "560037", "560100", "560076", "560078", "560011", "560085", "560010", "560003", "560024", "560092", "560064"],
+    "kwRange": [2, 25]
+  },
+  {
+    "vendorId": "v-greengrid",
+    "version": 1,
+    "updatedAt": "@-9d",
+    "packages": [
+      {
+        "id": "gg-eco-dcr",
+        "name": "Starter DCR",
+        "tier": "economy",
+        "dcr": true,
+        "panelId": "pn-heliora-540d",
+        "inverterId": "inv-ohmix-g",
+        "ratesPerKw": { "1-3": 60000, "3-5": 47000, "5-10": 43500, "10-25": 40500 }
+      },
+      {
+        "id": "gg-std-dcr",
+        "name": "Everyday DCR",
+        "tier": "standard",
+        "dcr": true,
+        "panelId": "pn-lumenra-575d",
+        "inverterId": "inv-ohmix-g",
+        "ratesPerKw": { "1-3": 64000, "3-5": 50000, "5-10": 46500, "10-25": 43000 }
+      },
+      {
+        "id": "gg-std",
+        "name": "Everyday",
+        "tier": "standard",
+        "dcr": false,
+        "panelId": "pn-lumenra-580",
+        "inverterId": "inv-ohmix-g",
+        "ratesPerKw": { "1-3": 59000, "3-5": 46000, "5-10": 43000, "10-25": 40000 }
+      },
+      {
+        "id": "gg-std-hyb",
+        "name": "Everyday Hybrid DCR",
+        "tier": "standard",
+        "dcr": true,
+        "panelId": "pn-lumenra-575d",
+        "inverterId": "inv-ohmix-h",
+        "ratesPerKw": { "1-3": 71000, "3-5": 56000, "5-10": 52000, "10-25": 48500 }
+      },
+      {
+        "id": "gg-pre-dcr",
+        "name": "Plus DCR",
+        "tier": "premium",
+        "dcr": true,
+        "panelId": "pn-viraj-600d",
+        "inverterId": "inv-ohmix-h",
+        "ratesPerKw": { "1-3": 70000, "3-5": 55000, "5-10": 51000, "10-25": 47500 }
+      }
+    ],
+    "structure": { "rcc": { "standard": 3000, "elevated_6ft": 7000, "elevated_10ft": 10000 }, "sheet": { "standard": 2200, "elevated_6ft": 6200, "elevated_10ft": 9200 }, "tile": { "standard": 4000, "elevated_6ft": 8000, "elevated_10ft": 11000 } },
+    "site": { "perFloorAbove2": 2500, "freeRadiusKm": 15, "perKmBeyond": 50 },
+    "fixed": { "netMeterFee": 6500, "paperwork": 3500, "transport": 2500 },
+    "addOns": {
+      "batteryPerKwh": 30000,
+      "evCharger": { "3.3": 30000, "7.4": 52000 },
+      "monitoring": 3000,
+      "amcPerYear": 4500
+    },
+    "terms": { "workmanshipWarrantyYears": 5, "paymentMilestones": "30% advance / 60% on delivery / 10% on net-meter", "validUntil": "@+60d", "tolerancePct": 10 },
+    "availability": { "pn-heliora-540d": { "status": "in_stock", "leadTimeDays": 7 }, "pn-heliora-550": { "status": "in_stock", "leadTimeDays": 7 }, "pn-lumenra-575d": { "status": "in_stock", "leadTimeDays": 7 }, "pn-lumenra-580": { "status": "in_stock", "leadTimeDays": 7 }, "pn-viraj-600d": { "status": "in_stock", "leadTimeDays": 7 }, "pn-astracell-445": { "status": "in_stock", "leadTimeDays": 7 }, "inv-sparq-s": { "status": "in_stock", "leadTimeDays": 7 }, "inv-ohmix-g": { "status": "in_stock", "leadTimeDays": 7 }, "inv-ohmix-h": { "status": "in_stock", "leadTimeDays": 7 }, "inv-tarang-p": { "status": "in_stock", "leadTimeDays": 7 }, "inv-tarang-h": { "status": "in_stock", "leadTimeDays": 7 }, "bat-kosha-5": { "status": "in_stock", "leadTimeDays": 14 }, "bat-kosha-10": { "status": "in_stock", "leadTimeDays": 14 }, "bat-nidhi-10": { "status": "on_order", "leadTimeDays": 30 }, "ev-charjo-3": { "status": "in_stock", "leadTimeDays": 7 }, "ev-charjo-7": { "status": "in_stock", "leadTimeDays": 7 } },
+    "servicePincodes": ["560102", "560034", "560103", "560100", "560076", "560078", "560011", "560085", "560037", "560066", "560010", "560003"],
+    "kwRange": [1, 15]
+  },
+  {
+    "vendorId": "v-bluepeak",
+    "version": 1,
+    "updatedAt": "@-2d",
+    "packages": [
+      {
+        "id": "bp-eco-dcr",
+        "name": "Basic DCR",
+        "tier": "economy",
+        "dcr": true,
+        "panelId": "pn-heliora-540d",
+        "inverterId": "inv-sparq-s",
+        "ratesPerKw": { "1-3": 59000, "3-5": 46000, "5-10": 43000, "10-25": 40000 }
+      },
+      {
+        "id": "bp-std-dcr",
+        "name": "Standard DCR",
+        "tier": "standard",
+        "dcr": true,
+        "panelId": "pn-lumenra-575d",
+        "inverterId": "inv-ohmix-g",
+        "ratesPerKw": { "1-3": 62500, "3-5": 49000, "5-10": 45500, "10-25": 42500 }
+      },
+      {
+        "id": "bp-std-hyb",
+        "name": "Standard Hybrid DCR",
+        "tier": "standard",
+        "dcr": true,
+        "panelId": "pn-lumenra-575d",
+        "inverterId": "inv-ohmix-h",
+        "ratesPerKw": { "1-3": 70000, "3-5": 55000, "5-10": 51000, "10-25": 48000 }
+      }
+    ],
+    "structure": { "rcc": { "standard": 3000, "elevated_6ft": 7000, "elevated_10ft": 10000 }, "sheet": { "standard": 2200, "elevated_6ft": 6200, "elevated_10ft": 9200 }, "tile": { "standard": 4000, "elevated_6ft": 8000, "elevated_10ft": 11000 } },
+    "site": { "perFloorAbove2": 2500, "freeRadiusKm": 15, "perKmBeyond": 45 },
+    "fixed": { "netMeterFee": 6000, "paperwork": 3000, "transport": 2500 },
+    "addOns": {
+      "batteryPerKwh": 31000,
+      "evCharger": { "3.3": 31000, "7.4": 54000 },
+      "monitoring": 2500,
+      "amcPerYear": 4000
+    },
+    "terms": { "workmanshipWarrantyYears": 5, "paymentMilestones": "25% advance / 65% on delivery / 10% on commissioning", "validUntil": "@+75d", "tolerancePct": 10 },
+    "availability": { "pn-heliora-540d": { "status": "in_stock", "leadTimeDays": 7 }, "pn-heliora-550": { "status": "in_stock", "leadTimeDays": 7 }, "pn-lumenra-575d": { "status": "in_stock", "leadTimeDays": 7 }, "pn-lumenra-580": { "status": "in_stock", "leadTimeDays": 7 }, "pn-viraj-600d": { "status": "in_stock", "leadTimeDays": 7 }, "pn-astracell-445": { "status": "in_stock", "leadTimeDays": 7 }, "inv-sparq-s": { "status": "in_stock", "leadTimeDays": 7 }, "inv-ohmix-g": { "status": "in_stock", "leadTimeDays": 7 }, "inv-ohmix-h": { "status": "in_stock", "leadTimeDays": 7 }, "inv-tarang-p": { "status": "in_stock", "leadTimeDays": 7 }, "inv-tarang-h": { "status": "in_stock", "leadTimeDays": 7 }, "bat-kosha-5": { "status": "in_stock", "leadTimeDays": 14 }, "bat-kosha-10": { "status": "on_order", "leadTimeDays": 25 }, "bat-nidhi-10": { "status": "in_stock", "leadTimeDays": 14 }, "ev-charjo-3": { "status": "in_stock", "leadTimeDays": 7 }, "ev-charjo-7": { "status": "in_stock", "leadTimeDays": 7 } },
+    "servicePincodes": ["560102", "560034", "560103", "560066", "560037", "560100"],
+    "kwRange": [1, 10]
+  },
+  {
+    "vendorId": "v-arka",
+    "version": 1,
+    "updatedAt": "@-140d",
+    "packages": [
+      {
+        "id": "ak-std-dcr",
+        "name": "Classic DCR",
+        "tier": "standard",
+        "dcr": true,
+        "panelId": "pn-heliora-540d",
+        "inverterId": "inv-ohmix-g",
+        "ratesPerKw": { "1-3": 60000, "3-5": 47500, "5-10": 44000, "10-25": 41000 }
+      },
+      {
+        "id": "ak-std",
+        "name": "Classic",
+        "tier": "standard",
+        "dcr": false,
+        "panelId": "pn-heliora-550",
+        "inverterId": "inv-ohmix-g",
+        "ratesPerKw": { "1-3": 56500, "3-5": 44500, "5-10": 41500, "10-25": 38500 }
+      },
+      {
+        "id": "ak-pre-dcr",
+        "name": "Heritage DCR",
+        "tier": "premium",
+        "dcr": true,
+        "panelId": "pn-viraj-600d",
+        "inverterId": "inv-tarang-p",
+        "ratesPerKw": { "1-3": 67000, "3-5": 53000, "5-10": 49500, "10-25": 46000 }
+      }
+    ],
+    "structure": { "rcc": { "standard": 3000, "elevated_6ft": 7000, "elevated_10ft": 10000 }, "sheet": { "standard": 2200, "elevated_6ft": 6200, "elevated_10ft": 9200 }, "tile": { "standard": 4000, "elevated_6ft": 8000, "elevated_10ft": 11000 } },
+    "site": { "perFloorAbove2": 2500, "freeRadiusKm": 15, "perKmBeyond": 50 },
+    "fixed": { "netMeterFee": 6000, "paperwork": 3000, "transport": 2500 },
+    "addOns": {
+      "batteryPerKwh": 32000,
+      "evCharger": { "3.3": 32000, "7.4": 55000 },
+      "monitoring": 3500,
+      "amcPerYear": 4000
+    },
+    "terms": { "workmanshipWarrantyYears": 5, "paymentMilestones": "40% advance / 50% on delivery / 10% on commissioning", "validUntil": "@-20d", "tolerancePct": 10 },
+    "availability": { "pn-heliora-540d": { "status": "in_stock", "leadTimeDays": 7 }, "pn-heliora-550": { "status": "in_stock", "leadTimeDays": 7 }, "pn-lumenra-575d": { "status": "in_stock", "leadTimeDays": 7 }, "pn-lumenra-580": { "status": "in_stock", "leadTimeDays": 7 }, "pn-viraj-600d": { "status": "in_stock", "leadTimeDays": 7 }, "pn-astracell-445": { "status": "in_stock", "leadTimeDays": 7 }, "inv-sparq-s": { "status": "in_stock", "leadTimeDays": 7 }, "inv-ohmix-g": { "status": "in_stock", "leadTimeDays": 7 }, "inv-ohmix-h": { "status": "in_stock", "leadTimeDays": 7 }, "inv-tarang-p": { "status": "in_stock", "leadTimeDays": 7 }, "inv-tarang-h": { "status": "in_stock", "leadTimeDays": 7 }, "bat-kosha-5": { "status": "in_stock", "leadTimeDays": 14 }, "bat-kosha-10": { "status": "in_stock", "leadTimeDays": 14 }, "bat-nidhi-10": { "status": "in_stock", "leadTimeDays": 14 }, "ev-charjo-3": { "status": "in_stock", "leadTimeDays": 7 }, "ev-charjo-7": { "status": "in_stock", "leadTimeDays": 7 } },
+    "servicePincodes": ["560102", "560034", "560103", "560100", "560076", "560078", "560011", "560085", "560037", "560010", "560003"],
+    "kwRange": [1, 10]
+  },
+  {
+    "vendorId": "v-deccan",
+    "version": 1,
+    "updatedAt": "@-15d",
+    "packages": [
+      {
+        "id": "dc-eco-dcr",
+        "name": "Value DCR",
+        "tier": "economy",
+        "dcr": true,
+        "panelId": "pn-heliora-540d",
+        "inverterId": "inv-sparq-s",
+        "ratesPerKw": { "1-3": 59500, "3-5": 46500, "5-10": 43000, "10-25": 40000 }
+      },
+      {
+        "id": "dc-std-dcr",
+        "name": "Standard DCR",
+        "tier": "standard",
+        "dcr": true,
+        "panelId": "pn-lumenra-575d",
+        "inverterId": "inv-ohmix-g",
+        "ratesPerKw": { "1-3": 63000, "3-5": 49500, "5-10": 46000, "10-25": 43000 }
+      },
+      {
+        "id": "dc-std-hyb",
+        "name": "Standard Hybrid DCR",
+        "tier": "standard",
+        "dcr": true,
+        "panelId": "pn-lumenra-575d",
+        "inverterId": "inv-tarang-h",
+        "ratesPerKw": { "1-3": 71500, "3-5": 56000, "5-10": 52000, "10-25": 48500 }
+      }
+    ],
+    "structure": { "rcc": { "standard": 3000, "elevated_6ft": 7000, "elevated_10ft": 10000 }, "sheet": { "standard": 2200, "elevated_6ft": 6200, "elevated_10ft": 9200 }, "tile": { "standard": 4000, "elevated_6ft": 8000, "elevated_10ft": 11000 } },
+    "site": { "perFloorAbove2": 2500, "freeRadiusKm": 15, "perKmBeyond": 50 },
+    "fixed": { "netMeterFee": 6000, "paperwork": 3000, "transport": 2500 },
+    "addOns": {
+      "batteryPerKwh": 30000,
+      "evCharger": { "3.3": 30000, "7.4": 53000 },
+      "monitoring": 3000,
+      "amcPerYear": 4000
+    },
+    "terms": { "workmanshipWarrantyYears": 5, "paymentMilestones": "30% advance / 60% on delivery / 10% on commissioning", "validUntil": "@+50d", "tolerancePct": 10 },
+    "availability": { "pn-heliora-540d": { "status": "in_stock", "leadTimeDays": 7 }, "pn-heliora-550": { "status": "in_stock", "leadTimeDays": 7 }, "pn-lumenra-575d": { "status": "in_stock", "leadTimeDays": 7 }, "pn-lumenra-580": { "status": "in_stock", "leadTimeDays": 7 }, "pn-viraj-600d": { "status": "in_stock", "leadTimeDays": 7 }, "pn-astracell-445": { "status": "in_stock", "leadTimeDays": 7 }, "inv-sparq-s": { "status": "in_stock", "leadTimeDays": 7 }, "inv-ohmix-g": { "status": "in_stock", "leadTimeDays": 7 }, "inv-ohmix-h": { "status": "in_stock", "leadTimeDays": 7 }, "inv-tarang-p": { "status": "in_stock", "leadTimeDays": 7 }, "inv-tarang-h": { "status": "in_stock", "leadTimeDays": 7 }, "bat-kosha-5": { "status": "in_stock", "leadTimeDays": 14 }, "bat-kosha-10": { "status": "in_stock", "leadTimeDays": 14 }, "bat-nidhi-10": { "status": "in_stock", "leadTimeDays": 14 }, "ev-charjo-3": { "status": "in_stock", "leadTimeDays": 7 }, "ev-charjo-7": { "status": "in_stock", "leadTimeDays": 7 } },
+    "servicePincodes": ["560024", "560092", "560064", "560003", "560010"],
+    "kwRange": [3, 25]
+  },
+  {
+    "vendorId": "v-vayu",
+    "version": 1,
+    "updatedAt": "@-20d",
+    "packages": [
+      {
+        "id": "vy-std-dcr",
+        "name": "Villa DCR",
+        "tier": "standard",
+        "dcr": true,
+        "panelId": "pn-lumenra-575d",
+        "inverterId": "inv-ohmix-g",
+        "ratesPerKw": { "1-3": 62000, "3-5": 48500, "5-10": 45000, "10-25": 41500 }
+      },
+      {
+        "id": "vy-pre-dcr",
+        "name": "Villa Premium DCR",
+        "tier": "premium",
+        "dcr": true,
+        "panelId": "pn-viraj-600d",
+        "inverterId": "inv-tarang-p",
+        "ratesPerKw": { "1-3": 69000, "3-5": 54000, "5-10": 50000, "10-25": 46500 }
+      },
+      {
+        "id": "vy-pre",
+        "name": "Villa Premium",
+        "tier": "premium",
+        "dcr": false,
+        "panelId": "pn-astracell-445",
+        "inverterId": "inv-tarang-p",
+        "ratesPerKw": { "1-3": 73000, "3-5": 57000, "5-10": 53000, "10-25": 49000 }
+      }
+    ],
+    "structure": { "rcc": { "standard": 3200, "elevated_6ft": 7200, "elevated_10ft": 10200 }, "sheet": { "standard": 2400, "elevated_6ft": 6400, "elevated_10ft": 9400 }, "tile": { "standard": 4200, "elevated_6ft": 8200, "elevated_10ft": 11200 } },
+    "site": { "perFloorAbove2": 2000, "freeRadiusKm": 25, "perKmBeyond": 40 },
+    "fixed": { "netMeterFee": 7500, "paperwork": 4000, "transport": 3000 },
+    "addOns": {
+      "batteryPerKwh": 31000,
+      "evCharger": { "7.4": 56000 },
+      "monitoring": 0,
+      "amcPerYear": 6000
+    },
+    "terms": { "workmanshipWarrantyYears": 7, "paymentMilestones": "30% advance / 60% on delivery / 10% on commissioning", "validUntil": "@+40d", "tolerancePct": 10 },
+    "availability": { "pn-heliora-540d": { "status": "in_stock", "leadTimeDays": 7 }, "pn-heliora-550": { "status": "in_stock", "leadTimeDays": 7 }, "pn-lumenra-575d": { "status": "in_stock", "leadTimeDays": 7 }, "pn-lumenra-580": { "status": "in_stock", "leadTimeDays": 7 }, "pn-viraj-600d": { "status": "in_stock", "leadTimeDays": 7 }, "pn-astracell-445": { "status": "in_stock", "leadTimeDays": 7 }, "inv-sparq-s": { "status": "in_stock", "leadTimeDays": 7 }, "inv-ohmix-g": { "status": "in_stock", "leadTimeDays": 7 }, "inv-ohmix-h": { "status": "in_stock", "leadTimeDays": 7 }, "inv-tarang-p": { "status": "in_stock", "leadTimeDays": 7 }, "inv-tarang-h": { "status": "in_stock", "leadTimeDays": 7 }, "bat-kosha-5": { "status": "in_stock", "leadTimeDays": 14 }, "bat-kosha-10": { "status": "in_stock", "leadTimeDays": 14 }, "bat-nidhi-10": { "status": "in_stock", "leadTimeDays": 14 }, "ev-charjo-3": { "status": "in_stock", "leadTimeDays": 7 }, "ev-charjo-7": { "status": "in_stock", "leadTimeDays": 7 } },
+    "servicePincodes": ["560102", "560034", "560103", "560066", "560037", "560100", "560076", "560078", "560011", "560085", "560010", "560003", "560024", "560092", "560064"],
+    "kwRange": [5, 25]
+  },
+  {
+    "vendorId": "v-sahyadri",
+    "version": 1,
+    "updatedAt": "@-25d",
+    "packages": [
+      {
+        "id": "sh-eco-dcr",
+        "name": "Budget DCR",
+        "tier": "economy",
+        "dcr": true,
+        "panelId": "pn-heliora-540d",
+        "inverterId": "inv-sparq-s",
+        "ratesPerKw": { "1-3": 59500, "3-5": 46500, "5-10": 43000, "10-25": 40000 }
+      },
+      {
+        "id": "sh-std-dcr",
+        "name": "Balanced DCR",
+        "tier": "standard",
+        "dcr": true,
+        "panelId": "pn-heliora-540d",
+        "inverterId": "inv-ohmix-g",
+        "ratesPerKw": { "1-3": 63000, "3-5": 49500, "5-10": 46000, "10-25": 42500 }
+      },
+      {
+        "id": "sh-std-hyb",
+        "name": "Balanced Hybrid DCR",
+        "tier": "standard",
+        "dcr": true,
+        "panelId": "pn-lumenra-575d",
+        "inverterId": "inv-ohmix-h",
+        "ratesPerKw": { "1-3": 70500, "3-5": 55500, "5-10": 51500, "10-25": 48000 }
+      },
+      {
+        "id": "sh-pre-dcr",
+        "name": "Elite DCR",
+        "tier": "premium",
+        "dcr": true,
+        "panelId": "pn-viraj-600d",
+        "inverterId": "inv-tarang-p",
+        "ratesPerKw": { "1-3": 69000, "3-5": 54000, "5-10": 50500, "10-25": 47000 }
+      },
+      {
+        "id": "sh-pre",
+        "name": "Elite HJT",
+        "tier": "premium",
+        "dcr": false,
+        "panelId": "pn-astracell-445",
+        "inverterId": "inv-tarang-p",
+        "ratesPerKw": { "1-3": 72000, "3-5": 56500, "5-10": 53000, "10-25": 49500 }
+      }
+    ],
+    "structure": { "rcc": { "standard": 3200, "elevated_6ft": 7200, "elevated_10ft": 10200 }, "sheet": { "standard": 2400, "elevated_6ft": 6400, "elevated_10ft": 9400 }, "tile": { "standard": 4200, "elevated_6ft": 8200, "elevated_10ft": 11200 } },
+    "site": { "perFloorAbove2": 2500, "freeRadiusKm": 18, "perKmBeyond": 50 },
+    "fixed": { "netMeterFee": 6000, "paperwork": 3500, "transport": 3000 },
+    "addOns": {
+      "batteryPerKwh": 29500,
+      "evCharger": { "3.3": 29000, "7.4": 50000 },
+      "monitoring": 3000,
+      "amcPerYear": 4000
+    },
+    "terms": { "workmanshipWarrantyYears": 5, "paymentMilestones": "30% advance / 60% on delivery / 10% on commissioning", "validUntil": "@+30d", "tolerancePct": 10 },
+    "availability": { "pn-heliora-540d": { "status": "in_stock", "leadTimeDays": 7 }, "pn-heliora-550": { "status": "in_stock", "leadTimeDays": 7 }, "pn-lumenra-575d": { "status": "in_stock", "leadTimeDays": 7 }, "pn-lumenra-580": { "status": "in_stock", "leadTimeDays": 7 }, "pn-viraj-600d": { "status": "in_stock", "leadTimeDays": 7 }, "pn-astracell-445": { "status": "on_order", "leadTimeDays": 35 }, "inv-sparq-s": { "status": "in_stock", "leadTimeDays": 7 }, "inv-ohmix-g": { "status": "in_stock", "leadTimeDays": 7 }, "inv-ohmix-h": { "status": "in_stock", "leadTimeDays": 7 }, "inv-tarang-p": { "status": "in_stock", "leadTimeDays": 7 }, "inv-tarang-h": { "status": "in_stock", "leadTimeDays": 7 }, "bat-kosha-5": { "status": "in_stock", "leadTimeDays": 14 }, "bat-kosha-10": { "status": "in_stock", "leadTimeDays": 14 }, "bat-nidhi-10": { "status": "in_stock", "leadTimeDays": 14 }, "ev-charjo-3": { "status": "in_stock", "leadTimeDays": 7 }, "ev-charjo-7": { "status": "in_stock", "leadTimeDays": 7 } },
+    "servicePincodes": ["560102", "560034", "560103", "560100", "560076", "560078", "560011", "560085", "560037", "560024", "560092", "560064", "560066"],
+    "kwRange": [1, 20]
+  }
+]

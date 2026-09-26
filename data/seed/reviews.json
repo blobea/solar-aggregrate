@@ -1,0 +1,792 @@
+[
+ {
+  "id": "rev-001",
+  "vendorId": "v-suryakiran",
+  "requestId": null,
+  "customerName": "Vikram S.",
+  "milestone": "survey",
+  "scores": {
+   "quoteAccuracy": 3,
+   "timeliness": 4,
+   "communication": 4
+  },
+  "reasons": {},
+  "text": "Survey was quick. Final number was higher than the site showed.",
+  "createdAt": "@-20d",
+  "status": "published"
+ },
+ {
+  "id": "rev-002",
+  "vendorId": "v-suryakiran",
+  "requestId": null,
+  "customerName": "Meera K.",
+  "milestone": "install",
+  "scores": {
+   "quoteAccuracy": 2,
+   "timeliness": 3,
+   "workmanship": 3,
+   "paperwork": 3,
+   "communication": 3
+  },
+  "reasons": {
+   "quoteAccuracy": "price_above_estimate"
+  },
+  "text": "Final bill ~25% above the estimate because of \"extra structure\".",
+  "createdAt": "@-45d",
+  "status": "published",
+  "evidence": "INV-2402",
+  "reply": {
+   "text": "Your roof needed an elevated structure which was not in the original configuration. We explained this at survey.",
+   "at": "@-43d"
+  }
+ },
+ {
+  "id": "rev-003",
+  "vendorId": "v-suryakiran",
+  "requestId": null,
+  "customerName": "Rahul N.",
+  "milestone": "install",
+  "scores": {
+   "quoteAccuracy": 2,
+   "timeliness": 2,
+   "workmanship": 3,
+   "paperwork": 3,
+   "communication": 2
+  },
+  "reasons": {
+   "quoteAccuracy": "price_above_estimate",
+   "timeliness": "missed_date",
+   "communication": "no_response"
+  },
+  "text": "Install slipped by 3 weeks and price went up.",
+  "createdAt": "@-80d",
+  "status": "published",
+  "evidence": "INV-2403"
+ },
+ {
+  "id": "rev-004",
+  "vendorId": "v-suryakiran",
+  "requestId": null,
+  "customerName": "Divya P.",
+  "milestone": "install",
+  "scores": {
+   "quoteAccuracy": 3,
+   "timeliness": 4,
+   "workmanship": 4,
+   "paperwork": 1,
+   "communication": 4
+  },
+  "reasons": {
+   "paperwork": "discom_delay"
+  },
+  "text": "Net meter took forever — BESCOM side, not the installer.",
+  "createdAt": "@-120d",
+  "status": "published",
+  "evidence": "INV-2404"
+ },
+ {
+  "id": "rev-005",
+  "vendorId": "v-suryakiran",
+  "requestId": null,
+  "customerName": "Karthik M.",
+  "milestone": "survey",
+  "scores": {
+   "quoteAccuracy": 4,
+   "timeliness": 4,
+   "communication": 4
+  },
+  "reasons": {},
+  "text": "Fair and friendly.",
+  "createdAt": "@-150d",
+  "status": "published"
+ },
+ {
+  "id": "rev-006",
+  "vendorId": "v-suryakiran",
+  "requestId": null,
+  "customerName": "Sneha B.",
+  "milestone": "longterm",
+  "scores": {
+   "workmanship": 3,
+   "afterSales": 2,
+   "communication": 3
+  },
+  "reasons": {
+   "afterSales": "no_response"
+  },
+  "text": "Generation is fine, but getting a technician out took two weeks.",
+  "createdAt": "@-250d",
+  "status": "published",
+  "generationReading": 4222,
+  "resolvedByVendor": true,
+  "reply": {
+   "text": "Sorry for the delay — we have added a second service team for your area.",
+   "at": "@-245d"
+  }
+ },
+ {
+  "id": "rev-007",
+  "vendorId": "v-suryakiran",
+  "requestId": null,
+  "customerName": "Arjun T.",
+  "milestone": "install",
+  "scores": {
+   "quoteAccuracy": 2,
+   "timeliness": 4,
+   "workmanship": 3,
+   "paperwork": 4,
+   "communication": 3
+  },
+  "reasons": {
+   "quoteAccuracy": "price_above_estimate"
+  },
+  "text": "Cheaper than others even after the increase, but the estimate was off.",
+  "createdAt": "@-300d",
+  "status": "published",
+  "evidence": "INV-2407"
+ },
+ {
+  "id": "rev-008",
+  "vendorId": "v-nimbus",
+  "requestId": null,
+  "customerName": "Lakshmi V.",
+  "milestone": "install",
+  "scores": {
+   "quoteAccuracy": 5,
+   "timeliness": 5,
+   "workmanship": 5,
+   "paperwork": 5,
+   "communication": 5
+  },
+  "reasons": {},
+  "text": "Final quote matched the estimate to the rupee. Neat cabling.",
+  "createdAt": "@-10d",
+  "status": "published",
+  "evidence": "INV-2408"
+ },
+ {
+  "id": "rev-009",
+  "vendorId": "v-nimbus",
+  "requestId": null,
+  "customerName": "Rohan D.",
+  "milestone": "survey",
+  "scores": {
+   "quoteAccuracy": 5,
+   "timeliness": 4,
+   "communication": 5
+  },
+  "reasons": {},
+  "text": "Engineer spent an hour on the roof and explained shading.",
+  "createdAt": "@-25d",
+  "status": "published"
+ },
+ {
+  "id": "rev-010",
+  "vendorId": "v-nimbus",
+  "requestId": null,
+  "customerName": "Priya G.",
+  "milestone": "install",
+  "scores": {
+   "quoteAccuracy": 5,
+   "timeliness": 4,
+   "workmanship": 5,
+   "paperwork": 4,
+   "communication": 5
+  },
+  "reasons": {},
+  "text": "Excellent work; one day late due to rain.",
+  "createdAt": "@-60d",
+  "status": "published",
+  "evidence": "INV-2410"
+ },
+ {
+  "id": "rev-011",
+  "vendorId": "v-nimbus",
+  "requestId": null,
+  "customerName": "Suresh H.",
+  "milestone": "longterm",
+  "scores": {
+   "workmanship": 5,
+   "afterSales": 5,
+   "communication": 4
+  },
+  "reasons": {},
+  "text": "Generation above projection for 8 months. Quick AMC visit.",
+  "createdAt": "@-200d",
+  "status": "published",
+  "generationReading": 4407
+ },
+ {
+  "id": "rev-012",
+  "vendorId": "v-nimbus",
+  "requestId": null,
+  "customerName": "Kavya J.",
+  "milestone": "install",
+  "scores": {
+   "quoteAccuracy": 4,
+   "timeliness": 5,
+   "workmanship": 5,
+   "paperwork": 5,
+   "communication": 4
+  },
+  "reasons": {},
+  "text": "Expensive, but no surprises.",
+  "createdAt": "@-110d",
+  "status": "published",
+  "evidence": "INV-2412"
+ },
+ {
+  "id": "rev-013",
+  "vendorId": "v-nimbus",
+  "requestId": null,
+  "customerName": "Nikhil A.",
+  "milestone": "survey",
+  "scores": {
+   "quoteAccuracy": 5,
+   "timeliness": 5,
+   "communication": 5
+  },
+  "reasons": {},
+  "text": "Very professional.",
+  "createdAt": "@-140d",
+  "status": "published"
+ },
+ {
+  "id": "rev-014",
+  "vendorId": "v-nimbus",
+  "requestId": null,
+  "customerName": "Pooja L.",
+  "milestone": "install",
+  "scores": {
+   "quoteAccuracy": 5,
+   "timeliness": 3,
+   "workmanship": 5,
+   "paperwork": 2,
+   "communication": 4
+  },
+  "reasons": {
+   "paperwork": "subsidy_portal_delay"
+  },
+  "text": "Subsidy portal was stuck for weeks; Nimbus kept following up.",
+  "createdAt": "@-190d",
+  "status": "published",
+  "evidence": "INV-2414"
+ },
+ {
+  "id": "rev-015",
+  "vendorId": "v-nimbus",
+  "requestId": null,
+  "customerName": "Manoj C.",
+  "milestone": "longterm",
+  "scores": {
+   "workmanship": 5,
+   "afterSales": 4,
+   "communication": 5
+  },
+  "reasons": {},
+  "text": "Still flawless after a monsoon.",
+  "createdAt": "@-330d",
+  "status": "published",
+  "generationReading": 4555
+ },
+ {
+  "id": "rev-016",
+  "vendorId": "v-nimbus",
+  "requestId": null,
+  "customerName": "Deepa S.",
+  "milestone": "install",
+  "scores": {
+   "quoteAccuracy": 5,
+   "timeliness": 5,
+   "workmanship": 4,
+   "paperwork": 5,
+   "communication": 5
+  },
+  "reasons": {},
+  "text": "Just commissioned — great team.",
+  "createdAt": "@-1d",
+  "status": "pending_check",
+  "evidence": "INV-2416"
+ },
+ {
+  "id": "rev-017",
+  "vendorId": "v-greengrid",
+  "requestId": null,
+  "customerName": "Aditya R.",
+  "milestone": "install",
+  "scores": {
+   "quoteAccuracy": 4,
+   "timeliness": 4,
+   "workmanship": 4,
+   "paperwork": 4,
+   "communication": 5
+  },
+  "reasons": {},
+  "text": "EV charger and panels installed together. Good app.",
+  "createdAt": "@-15d",
+  "status": "published",
+  "evidence": "INV-2417"
+ },
+ {
+  "id": "rev-018",
+  "vendorId": "v-greengrid",
+  "requestId": null,
+  "customerName": "Farah Z.",
+  "milestone": "survey",
+  "scores": {
+   "quoteAccuracy": 4,
+   "timeliness": 5,
+   "communication": 4
+  },
+  "reasons": {},
+  "text": "On time and clear.",
+  "createdAt": "@-30d",
+  "status": "published"
+ },
+ {
+  "id": "rev-019",
+  "vendorId": "v-greengrid",
+  "requestId": null,
+  "customerName": "Ganesh I.",
+  "milestone": "install",
+  "scores": {
+   "quoteAccuracy": 4,
+   "timeliness": 2,
+   "workmanship": 4,
+   "paperwork": 4,
+   "communication": 3
+  },
+  "reasons": {
+   "timeliness": "missed_date"
+  },
+  "text": "Install date moved twice.",
+  "createdAt": "@-55d",
+  "status": "published",
+  "evidence": "INV-2419",
+  "resolvedByVendor": true,
+  "reply": {
+   "text": "We apologise — a supplier delay. We waived the transport charge for you.",
+   "at": "@-53d"
+  }
+ },
+ {
+  "id": "rev-020",
+  "vendorId": "v-greengrid",
+  "requestId": null,
+  "customerName": "Ananya R.",
+  "milestone": "longterm",
+  "scores": {
+   "workmanship": 4,
+   "afterSales": 4,
+   "communication": 4
+  },
+  "reasons": {},
+  "text": "Steady generation, monitoring alerts work.",
+  "createdAt": "@-210d",
+  "status": "published",
+  "generationReading": 4740
+ },
+ {
+  "id": "rev-021",
+  "vendorId": "v-greengrid",
+  "requestId": null,
+  "customerName": "Vikram S.",
+  "milestone": "install",
+  "scores": {
+   "quoteAccuracy": 5,
+   "timeliness": 4,
+   "workmanship": 4,
+   "paperwork": 5,
+   "communication": 4
+  },
+  "reasons": {},
+  "text": "Final quote within 5% of what the site showed.",
+  "createdAt": "@-95d",
+  "status": "published",
+  "evidence": "INV-2421"
+ },
+ {
+  "id": "rev-022",
+  "vendorId": "v-greengrid",
+  "requestId": null,
+  "customerName": "Meera K.",
+  "milestone": "survey",
+  "scores": {
+   "quoteAccuracy": 4,
+   "timeliness": 4,
+   "communication": 5
+  },
+  "reasons": {},
+  "text": "Friendly and knowledgeable.",
+  "createdAt": "@-130d",
+  "status": "published"
+ },
+ {
+  "id": "rev-023",
+  "vendorId": "v-greengrid",
+  "requestId": null,
+  "customerName": "Rahul N.",
+  "milestone": "install",
+  "scores": {
+   "quoteAccuracy": 3,
+   "timeliness": 4,
+   "workmanship": 4,
+   "paperwork": 4,
+   "communication": 4
+  },
+  "reasons": {},
+  "text": "Slightly higher final price for a longer cable run; explained well.",
+  "createdAt": "@-170d",
+  "status": "published",
+  "evidence": "INV-2423"
+ },
+ {
+  "id": "rev-024",
+  "vendorId": "v-greengrid",
+  "requestId": null,
+  "customerName": "Divya P.",
+  "milestone": "longterm",
+  "scores": {
+   "workmanship": 4,
+   "afterSales": 3,
+   "communication": 4
+  },
+  "reasons": {},
+  "text": "OK after-sales.",
+  "createdAt": "@-360d",
+  "status": "published",
+  "generationReading": 4888
+ },
+ {
+  "id": "rev-025",
+  "vendorId": "v-arka",
+  "requestId": null,
+  "customerName": "Karthik M.",
+  "milestone": "install",
+  "scores": {
+   "quoteAccuracy": 2,
+   "timeliness": 4,
+   "workmanship": 4,
+   "paperwork": 4,
+   "communication": 4
+  },
+  "reasons": {
+   "quoteAccuracy": "price_above_estimate"
+  },
+  "text": "Their listed price was old — final was quite a bit higher.",
+  "createdAt": "@-35d",
+  "status": "published",
+  "evidence": "INV-2425",
+  "dispute": {
+   "ground": "factually_false",
+   "note": "Customer changed to a premium package at survey; signed quote attached.",
+   "raisedAt": "@-33d",
+   "outcome": "open"
+  }
+ },
+ {
+  "id": "rev-026",
+  "vendorId": "v-arka",
+  "requestId": null,
+  "customerName": "Sneha B.",
+  "milestone": "survey",
+  "scores": {
+   "quoteAccuracy": 4,
+   "timeliness": 4,
+   "communication": 4
+  },
+  "reasons": {},
+  "text": "Old-school but thorough.",
+  "createdAt": "@-70d",
+  "status": "published"
+ },
+ {
+  "id": "rev-027",
+  "vendorId": "v-arka",
+  "requestId": null,
+  "customerName": "Arjun T.",
+  "milestone": "install",
+  "scores": {
+   "quoteAccuracy": 4,
+   "timeliness": 4,
+   "workmanship": 4,
+   "paperwork": 3,
+   "communication": 4
+  },
+  "reasons": {},
+  "text": "Solid installation.",
+  "createdAt": "@-160d",
+  "status": "published",
+  "evidence": "INV-2427"
+ },
+ {
+  "id": "rev-028",
+  "vendorId": "v-arka",
+  "requestId": null,
+  "customerName": "Lakshmi V.",
+  "milestone": "longterm",
+  "scores": {
+   "workmanship": 4,
+   "afterSales": 4,
+   "communication": 3
+  },
+  "reasons": {},
+  "text": "Works well.",
+  "createdAt": "@-280d",
+  "status": "published",
+  "generationReading": 5036
+ },
+ {
+  "id": "rev-029",
+  "vendorId": "v-arka",
+  "requestId": null,
+  "customerName": "Rohan D.",
+  "milestone": "install",
+  "scores": {
+   "quoteAccuracy": 4,
+   "timeliness": 3,
+   "workmanship": 4,
+   "paperwork": 4,
+   "communication": 3
+  },
+  "reasons": {},
+  "text": "Good value back then.",
+  "createdAt": "@-400d",
+  "status": "published",
+  "evidence": "INV-2429"
+ },
+ {
+  "id": "rev-030",
+  "vendorId": "v-deccan",
+  "requestId": null,
+  "customerName": "Priya G.",
+  "milestone": "install",
+  "scores": {
+   "quoteAccuracy": 4,
+   "timeliness": 4,
+   "workmanship": 4,
+   "paperwork": 4,
+   "communication": 4
+  },
+  "reasons": {},
+  "text": "Good job in Yelahanka.",
+  "createdAt": "@-40d",
+  "status": "published",
+  "evidence": "INV-2430"
+ },
+ {
+  "id": "rev-031",
+  "vendorId": "v-deccan",
+  "requestId": null,
+  "customerName": "Suresh H.",
+  "milestone": "survey",
+  "scores": {
+   "quoteAccuracy": 4,
+   "timeliness": 5,
+   "communication": 4
+  },
+  "reasons": {},
+  "text": "Prompt survey.",
+  "createdAt": "@-90d",
+  "status": "published"
+ },
+ {
+  "id": "rev-032",
+  "vendorId": "v-deccan",
+  "requestId": null,
+  "customerName": "Kavya J.",
+  "milestone": "install",
+  "scores": {
+   "quoteAccuracy": 5,
+   "timeliness": 4,
+   "workmanship": 4,
+   "paperwork": 4,
+   "communication": 4
+  },
+  "reasons": {},
+  "text": "Estimate held.",
+  "createdAt": "@-180d",
+  "status": "published",
+  "evidence": "INV-2432"
+ },
+ {
+  "id": "rev-033",
+  "vendorId": "v-deccan",
+  "requestId": null,
+  "customerName": "Nikhil A.",
+  "milestone": "longterm",
+  "scores": {
+   "workmanship": 4,
+   "afterSales": 4,
+   "communication": 4
+  },
+  "reasons": {},
+  "text": "No issues.",
+  "createdAt": "@-260d",
+  "status": "published",
+  "generationReading": 5221
+ },
+ {
+  "id": "rev-034",
+  "vendorId": "v-vayu",
+  "requestId": null,
+  "customerName": "Pooja L.",
+  "milestone": "install",
+  "scores": {
+   "quoteAccuracy": 4,
+   "timeliness": 4,
+   "workmanship": 5,
+   "paperwork": 4,
+   "communication": 4
+  },
+  "reasons": {},
+  "text": "10 kW villa install, well managed.",
+  "createdAt": "@-50d",
+  "status": "published",
+  "evidence": "INV-2434"
+ },
+ {
+  "id": "rev-035",
+  "vendorId": "v-vayu",
+  "requestId": null,
+  "customerName": "Manoj C.",
+  "milestone": "survey",
+  "scores": {
+   "quoteAccuracy": 4,
+   "timeliness": 3,
+   "communication": 4
+  },
+  "reasons": {},
+  "text": "Took a while to schedule.",
+  "createdAt": "@-100d",
+  "status": "published"
+ },
+ {
+  "id": "rev-036",
+  "vendorId": "v-sahyadri",
+  "requestId": null,
+  "customerName": "Deepa S.",
+  "milestone": "install",
+  "scores": {
+   "quoteAccuracy": 3,
+   "timeliness": 4,
+   "workmanship": 4,
+   "paperwork": 4,
+   "communication": 3
+  },
+  "reasons": {},
+  "text": "Final price 15% up after survey.",
+  "createdAt": "@-18d",
+  "status": "published",
+  "evidence": "INV-2436"
+ },
+ {
+  "id": "rev-037",
+  "vendorId": "v-sahyadri",
+  "requestId": null,
+  "customerName": "Aditya R.",
+  "milestone": "survey",
+  "scores": {
+   "quoteAccuracy": 1,
+   "timeliness": 1,
+   "communication": 1
+  },
+  "reasons": {
+   "quoteAccuracy": "other",
+   "timeliness": "other",
+   "communication": "other"
+  },
+  "text": "Worst company ever!!! Scammers!!!",
+  "createdAt": "@-65d",
+  "status": "published",
+  "dispute": {
+   "ground": "not_a_customer",
+   "note": "No survey or lead exists for this person.",
+   "raisedAt": "@-64d",
+   "outcome": "removed",
+   "opsNote": "No matching request or survey record. Removed.",
+   "resolvedAt": "@-60d"
+  }
+ },
+ {
+  "id": "rev-038",
+  "vendorId": "v-sahyadri",
+  "requestId": null,
+  "customerName": "Farah Z.",
+  "milestone": "install",
+  "scores": {
+   "quoteAccuracy": 2,
+   "timeliness": 4,
+   "workmanship": 4,
+   "paperwork": 4,
+   "communication": 4
+  },
+  "reasons": {
+   "quoteAccuracy": "price_above_estimate"
+  },
+  "text": "Price went up because of a tile roof.",
+  "createdAt": "@-115d",
+  "status": "published",
+  "evidence": "INV-2438",
+  "dispute": {
+   "ground": "outside_vendor_control",
+   "note": "Customer selected RCC; roof was clay tile.",
+   "raisedAt": "@-113d",
+   "outcome": "annotated",
+   "opsNote": "Configuration said RCC; survey photos show tile roof. Vendor context added.",
+   "resolvedAt": "@-110d"
+  }
+ },
+ {
+  "id": "rev-039",
+  "vendorId": "v-sahyadri",
+  "requestId": null,
+  "customerName": "Ganesh I.",
+  "milestone": "longterm",
+  "scores": {
+   "workmanship": 4,
+   "afterSales": 4,
+   "communication": 4
+  },
+  "reasons": {},
+  "text": "Good after-sales.",
+  "createdAt": "@-230d",
+  "status": "published",
+  "generationReading": 5443
+ },
+ {
+  "id": "rev-040",
+  "vendorId": "v-sahyadri",
+  "requestId": null,
+  "customerName": "Ananya R.",
+  "milestone": "survey",
+  "scores": {
+   "quoteAccuracy": 4,
+   "timeliness": 4,
+   "communication": 4
+  },
+  "reasons": {},
+  "text": "Helpful comparison of tiers.",
+  "createdAt": "@-150d",
+  "status": "published"
+ },
+ {
+  "id": "rev-041",
+  "vendorId": "v-sahyadri",
+  "requestId": null,
+  "customerName": "Vikram S.",
+  "milestone": "install",
+  "scores": {
+   "quoteAccuracy": 4,
+   "timeliness": 3,
+   "workmanship": 4,
+   "paperwork": 3,
+   "communication": 4
+  },
+  "reasons": {},
+  "text": "Fine overall.",
+  "createdAt": "@-210d",
+  "status": "published",
+  "evidence": "INV-2441"
+ }
+]

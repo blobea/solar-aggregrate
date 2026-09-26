@@ -1,0 +1,20 @@
+[
+  {
+    "customerName": "Ravi Menon", "phone": "+91 98450 00011", "address": "14, 5th Cross, Bellandur",
+    "createdAt": "@-3d", "vendorIds": ["v-greengrid", "v-nimbus", "v-bluepeak"], "statuses": ["survey_scheduled", "sent", "sent"],
+    "config": { "pincode": "560103", "roofAreaSqm": 45, "roofType": "rcc", "floors": 2, "structure": "standard", "monthlyUnits": 320, "sanctionedLoadKw": 4,
+      "prefs": { "subsidy": true, "tier": "standard", "battery": 0, "evCharger": 0, "finance": false } }
+  },
+  {
+    "customerName": "Shalini Rao", "phone": "+91 98450 00022", "address": "221, 2nd Main, Koramangala 4th Block",
+    "createdAt": "@-6d", "vendorIds": ["v-nimbus", "v-sahyadri"], "statuses": ["survey_done", "survey_scheduled"],
+    "config": { "pincode": "560034", "roofAreaSqm": 80, "roofType": "rcc", "floors": 3, "structure": "elevated_6ft", "monthlyUnits": 600, "sanctionedLoadKw": 7,
+      "prefs": { "subsidy": true, "tier": "premium", "battery": 5, "evCharger": 0, "finance": true } }
+  },
+  {
+    "customerName": "Imran Khan", "phone": "+91 98450 00033", "address": "7, Lake View Rd, Whitefield",
+    "createdAt": "@-1d", "vendorIds": ["v-greengrid", "v-suryakiran", "v-bluepeak"], "statuses": ["sent", "sent", "sent"],
+    "config": { "pincode": "560066", "roofAreaSqm": 55, "roofType": "sheet", "floors": 2, "structure": "standard", "monthlyUnits": 400, "sanctionedLoadKw": 5,
+      "prefs": { "subsidy": true, "tier": "economy", "battery": 0, "evCharger": 3.3, "finance": false } }
+  }
+]

@@ -1,0 +1,26 @@
+{
+  "panels": [
+    { "id": "pn-heliora-540d", "brand": "Heliora", "model": "Bharat 540 Mono PERC", "wp": 540, "technology": "Mono PERC", "dcr": true, "warrantyYears": 25 },
+    { "id": "pn-heliora-550", "brand": "Heliora", "model": "550 Mono PERC", "wp": 550, "technology": "Mono PERC", "dcr": false, "warrantyYears": 25 },
+    { "id": "pn-lumenra-575d", "brand": "Lumenra", "model": "TOPCon 575 DCR", "wp": 575, "technology": "N-type TOPCon", "dcr": true, "warrantyYears": 30 },
+    { "id": "pn-lumenra-580", "brand": "Lumenra", "model": "TOPCon 580", "wp": 580, "technology": "N-type TOPCon", "dcr": false, "warrantyYears": 30 },
+    { "id": "pn-viraj-600d", "brand": "Viraj", "model": "Bifacial 600 DCR", "wp": 600, "technology": "N-type bifacial", "dcr": true, "warrantyYears": 30 },
+    { "id": "pn-astracell-445", "brand": "AstraCell", "model": "HJT 445", "wp": 445, "technology": "Heterojunction (HJT)", "dcr": false, "warrantyYears": 30 }
+  ],
+  "inverters": [
+    { "id": "inv-sparq-s", "brand": "Sparq", "model": "S-Series grid-tie", "type": "string", "kwMin": 1, "kwMax": 10, "warrantyYears": 7 },
+    { "id": "inv-ohmix-g", "brand": "Ohmix", "model": "GT Pro", "type": "string", "kwMin": 3, "kwMax": 25, "warrantyYears": 10 },
+    { "id": "inv-ohmix-h", "brand": "Ohmix", "model": "HX Hybrid", "type": "hybrid", "kwMin": 3, "kwMax": 10, "warrantyYears": 10 },
+    { "id": "inv-tarang-p", "brand": "Tarang", "model": "Premium string", "type": "string", "kwMin": 1, "kwMax": 25, "warrantyYears": 12 },
+    { "id": "inv-tarang-h", "brand": "Tarang", "model": "Hybrid Pro", "type": "hybrid", "kwMin": 3, "kwMax": 10, "warrantyYears": 10 }
+  ],
+  "batteries": [
+    { "id": "bat-kosha-5", "brand": "Kosha", "model": "LFP 5", "kwh": 5, "chemistry": "LiFePO4", "warrantyYears": 8 },
+    { "id": "bat-kosha-10", "brand": "Kosha", "model": "LFP 10", "kwh": 10, "chemistry": "LiFePO4", "warrantyYears": 8 },
+    { "id": "bat-nidhi-10", "brand": "Nidhi", "model": "PowerWall 10", "kwh": 10, "chemistry": "LiFePO4", "warrantyYears": 10 }
+  ],
+  "evChargers": [
+    { "id": "ev-charjo-3", "brand": "Charjo", "model": "Home 3.3", "kw": 3.3, "warrantyYears": 2 },
+    { "id": "ev-charjo-7", "brand": "Charjo", "model": "Home 7.4", "kw": 7.4, "warrantyYears": 3 }
+  ]
+}
