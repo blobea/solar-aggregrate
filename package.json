@@ -1,0 +1,30 @@
+{
+  "name": "solar-aggregrate",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Clickable demo of a neutral rooftop-solar comparison platform for Bangalore (sample data).",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview --port 4173 --strictPort",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "e2e": "playwright test",
+    "screenshots": "playwright test tests/e2e/screenshots.spec.js"
+  },
+  "dependencies": {
+    "alpinejs": "^3.17.4",
+    "chart.js": "^4.5.1",
+    "leaflet": "^1.9.4",
+    "tabulator-tables": "^6.5.3",
+    "xlsx": "^0.18.5"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^8.5.2",
+    "@capacitor/core": "^8.5.2",
+    "@playwright/test": "^1.63.0",
+    "vite": "^8.3.1",
+    "vitest": "^5.0.2"
+  }
+}
