@@ -1,0 +1,26 @@
+<div>
+  <div class="page-head">
+    <h1>Leads</h1>
+    <p>Customers who chose you for a survey. Each lead includes their full configuration and the exact estimate they saw.</p>
+  </div>
+  <div class="tabs" role="tablist">
+    <template x-for="t in tabs" :key="t.key">
+      <button type="button" role="tab" :aria-selected="tab === t.key" @click="tab = t.key" x-text="`${t.label} (${count(t.key)})`"></button>
+    </template>
+  </div>
+  <template x-if="!shown.length"><div class="empty">No leads here yet.</div></template>
+  <div class="stack-sm">
+    <template x-for="l in shown" :key="l.id">
+      <a class="card row-between" :href="`#/vendor/leads/${l.id}`" style="text-decoration:none;color:inherit" data-testid="lead-row">
+        <div>
+          <strong x-text="l.customerName"></strong>
+          <div class="small muted" x-text="`${l.config.pincode} · ${l.estimate.kw} kW · ${l.estimate.packageName} · ${date(l.createdAt)}`"></div>
+        </div>
+        <div style="text-align:right">
+          <span class="badge badge-primary" x-text="statusLabel(l.status)"></span>
+          <div class="small num" x-text="`Est. ${inr(l.estimate.net)}`"></div>
+        </div>
+      </a>
+    </template>
+  </div>
+</div>

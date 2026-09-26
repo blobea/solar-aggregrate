@@ -1,0 +1,39 @@
+<div>
+  <div class="page-head">
+    <h1>Availability</h1>
+    <p>Mark what you can supply now. Packages using unavailable panels or inverters are hidden from estimates; lead times are shown to customers.</p>
+  </div>
+  <template x-for="g in groups" :key="g.key">
+    <section class="stack-sm" style="margin-bottom:24px">
+      <h2 x-text="g.label"></h2>
+      <div class="table-wrap">
+        <table class="table">
+          <thead><tr><th>Item</th><th>Status</th><th class="num">Lead time (days)</th></tr></thead>
+          <tbody>
+            <template x-for="item in g.items" :key="item.id">
+              <tr>
+                <td><strong x-text="`${item.brand} ${item.model}`"></strong><div class="small muted" x-text="item.detail"></div></td>
+                <td style="min-width:150px">
+                  <label class="sr-only" :for="'st-' + item.id" x-text="`Status for ${item.brand} ${item.model}`"></label>
+                  <select :id="'st-' + item.id" x-model="av[item.id].status" @change="dirty = true">
+                    <option value="in_stock">In stock</option><option value="on_order">On order</option><option value="unavailable">Unavailable</option>
+                  </select>
+                </td>
+                <td class="num" style="min-width:110px">
+                  <label class="sr-only" :for="'lt-' + item.id">Lead time in days</label>
+                  <input :id="'lt-' + item.id" type="number" min="0" max="120" x-model.number="av[item.id].leadTimeDays" @input="dirty = true" />
+                </td>
+              </tr>
+            </template>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </template>
+  <div class="tray" style="margin-top:0">
+    <div class="row-between">
+      <span class="small muted" x-text="dirty ? 'Unsaved changes' : 'Saving creates a new price-sheet version'"></span>
+      <button class="btn btn-primary" type="button" @click="save()" :disabled="!dirty">Save availability</button>
+    </div>
+  </div>
+</div>

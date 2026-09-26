@@ -1,0 +1,89 @@
+<div>
+  <a class="small" href="#/vendor/leads">← All leads</a>
+  <template x-if="l">
+    <div class="stack" style="margin-top:8px">
+      <div class="row-between">
+        <div>
+          <h1 style="margin-bottom:4px" x-text="l.customerName"></h1>
+          <div class="muted small" x-text="`${l.phone} · ${l.address}`"></div>
+        </div>
+        <span class="badge badge-primary" data-testid="lead-status" x-text="statusLabel(l.status)"></span>
+      </div>
+      <ol class="timeline" aria-label="Progress">
+        <template x-for="(s, i) in flow" :key="s"><li :class="{ done: i <= flow.indexOf(l.status), current: s === l.status }" x-text="statusLabel(s)"></li></template>
+      </ol>
+
+      <div class="card stack-sm" x-show="l.status !== 'installed'">
+        <h2 class="card-title">Next step</h2>
+        <template x-if="l.status === 'sent'">
+          <div class="row" style="align-items:end">
+            <div class="field" style="margin:0;flex:1 1 180px"><label for="sdate">Survey date</label><input id="sdate" type="date" x-model="surveyDate" /></div>
+            <button class="btn" type="button" @click="act('schedule')">Schedule survey</button>
+            <button class="btn btn-ghost" type="button" @click="act('surveyDone')">Mark survey done</button>
+          </div>
+        </template>
+        <template x-if="l.status === 'survey_scheduled'">
+          <div class="row"><span class="small" x-text="`Survey on ${date(l.survey.scheduledFor)}`"></span><button class="btn btn-primary" type="button" data-testid="mark-survey-done" @click="act('surveyDone')">Mark survey done</button></div>
+        </template>
+        <template x-if="['sent','survey_scheduled','survey_done'].includes(l.status)">
+          <form class="stack-sm" @submit.prevent="act('quote')" style="margin-top:8px">
+            <div class="row" style="align-items:end">
+              <div class="field" style="margin:0;flex:1 1 180px">
+                <label for="fq">Final quote after survey — net of subsidy (₹)</label>
+                <input id="fq" type="number" min="10000" step="100" x-model.number="quote" data-testid="final-quote" />
+              </div>
+              <button class="btn btn-primary" type="submit" data-testid="log-final-quote">Log final quote</button>
+            </div>
+            <div class="small" x-show="quote" :style="Math.abs(quoteDev) > 10 ? 'color:var(--c-danger)' : 'color:var(--c-muted)'"
+              x-text="`${quoteDev >= 0 ? '+' : ''}${quoteDev}% vs the estimate the customer saw. This feeds your public accuracy score.`"></div>
+            <div class="field" style="margin:0"><label for="fqn">Note to customer (optional)</label><input id="fqn" type="text" x-model="quoteNote" placeholder="e.g. elevated structure needed for shade" /></div>
+          </form>
+        </template>
+        <template x-if="l.status === 'quote_received'">
+          <div class="row" style="align-items:end">
+            <div class="field" style="margin:0;flex:1 1 180px"><label for="inv">Invoice number</label><input id="inv" type="text" x-model="invoice" /></div>
+            <button class="btn btn-primary" type="button" data-testid="mark-installed" @click="act('installed')">Mark installed</button>
+          </div>
+        </template>
+        <div class="error-text" x-show="error" x-text="error" role="alert"></div>
+      </div>
+
+      <div class="two-col">
+        <section class="card">
+          <h2 class="card-title">Estimate the customer saw</h2>
+          <p class="small muted" x-text="`Shown ${dateTime(l.estimate.shownAt)} from price sheet v${l.estimate.sheetVersion}. Logged and never edited.`"></p>
+          <table class="table">
+            <tbody>
+              <template x-for="li in l.estimate.lineItems" :key="li.code"><tr><td x-text="li.label"></td><td class="num" x-text="inr(li.amount)"></td></tr></template>
+              <tr><td><strong>Gross</strong></td><td class="num"><strong x-text="inr(l.estimate.gross)"></strong></td></tr>
+              <tr><td>Subsidy (platform)</td><td class="num" x-text="'−' + inr(l.estimate.subsidy)"></td></tr>
+              <tr><td><strong>Net shown</strong></td><td class="num"><strong x-text="inr(l.estimate.net)"></strong></td></tr>
+              <tr><td>Range shown</td><td class="num" x-text="lakhRange(l.estimate.low, l.estimate.high)"></td></tr>
+              <tr x-show="l.finalQuote"><td><strong>Your final quote</strong></td><td class="num"><strong x-text="l.finalQuote ? inr(l.finalQuote.amount) : ''"></strong></td></tr>
+            </tbody>
+          </table>
+        </section>
+        <section class="card">
+          <h2 class="card-title">Home configuration</h2>
+          <dl class="kv">
+            <dt>Pincode</dt><dd x-text="l.config.pincode"></dd>
+            <dt>Roof</dt><dd x-text="`${l.config.roofAreaSqm} m² · ${roofLabel(l.config.roofType)} · ${l.config.floors} floors`"></dd>
+            <dt>Structure</dt><dd x-text="structureLabel(l.config.structure)"></dd>
+            <dt>Usage</dt><dd x-text="`${l.config.monthlyUnits} units/month`"></dd>
+            <dt>Sanctioned load</dt><dd x-text="`${l.config.sanctionedLoadKw} kW`"></dd>
+            <dt>System size</dt><dd x-text="`${l.estimate.kw} kW`"></dd>
+            <dt>Subsidy</dt><dd x-text="l.config.prefs.subsidy ? 'Yes (DCR)' : 'No'"></dd>
+            <dt>Tier</dt><dd x-text="l.config.prefs.tier"></dd>
+            <dt>Battery</dt><dd x-text="l.config.prefs.battery ? `${l.config.prefs.battery} kWh` : 'None'"></dd>
+            <dt>EV charger</dt><dd x-text="l.config.prefs.evCharger ? `${l.config.prefs.evCharger} kW` : 'None'"></dd>
+            <dt>Finance</dt><dd x-text="l.config.prefs.finance ? 'Interested' : 'No'"></dd>
+          </dl>
+          <h3 style="margin-top:16px">History</h3>
+          <ul class="small" style="padding-left:18px;margin:0">
+            <template x-for="h in l.history" :key="h.at + h.status"><li x-text="`${dateTime(h.at)} — ${statusLabel(h.status)}${h.note ? ': ' + h.note : ''}`"></li></template>
+          </ul>
+        </section>
+      </div>
+    </div>
+  </template>
+</div>

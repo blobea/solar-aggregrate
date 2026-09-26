@@ -1,0 +1,33 @@
+<div>
+  <div class="page-head">
+    <h1 x-text="d ? d.vendor.name : 'Vendor dashboard'"></h1>
+    <p>Your leads, price sheet and reputation at a glance.</p>
+  </div>
+  <template x-if="d">
+    <div class="stack">
+      <template x-if="d.metrics.stale">
+        <div class="alert alert-warn row-between">
+          <span>Your price sheet expired on <strong x-text="date(d.metrics.validUntil)"></strong>. Customers see "prices may be outdated" and you rank lower.</span>
+          <a class="btn btn-sm" href="#/vendor/sheet">Update price sheet</a>
+        </div>
+      </template>
+      <div class="grid-4">
+        <a class="stat" href="#/vendor/leads" style="text-decoration:none;color:inherit"><div class="stat-label">New leads</div><div class="stat-value" data-testid="new-leads" x-text="d.newLeads"></div><div class="stat-note" x-text="`${d.activeLeads} active · ${d.installed} installed`"></div></a>
+        <div class="stat"><div class="stat-label">Price sheet</div><div class="stat-value" style="font-size:var(--fs-lg)" x-text="d.metrics.stale ? 'Expired' : 'Current'"></div><div class="stat-note" x-text="`v${d.metrics.sheetVersion} · updated ${daysAgo(d.metrics.updatedDaysAgo)} · valid until ${date(d.metrics.validUntil)}`"></div></div>
+        <div class="stat"><div class="stat-label">Quote accuracy</div><div style="margin:6px 0"><span class="badge" :class="badgeClass(d.metrics.accuracy.badge)" x-text="d.metrics.accuracy.label"></span></div><div class="stat-note" x-text="`${d.metrics.accuracy.count} final quotes`"></div></div>
+        <div class="stat"><div class="stat-label">Rating</div><div class="stat-value" x-text="d.metrics.rating.toFixed(2)"></div><div class="stat-note" x-text="`${d.metrics.ratingCount} reviews (Bayesian)`"></div></div>
+        <a class="stat" href="#/vendor/reviews" style="text-decoration:none;color:inherit"><div class="stat-label">Awaiting reply</div><div class="stat-value" x-text="d.awaitingReply"></div><div class="stat-note" x-text="`${d.openDisputes} open dispute(s)`"></div></a>
+      </div>
+      <div class="card">
+        <h2 class="card-title">How customers see you</h2>
+        <p class="small muted">Your rank on "Best match" comes from price (35%), rating (25%), quote accuracy (30%) and price-sheet freshness (10%). Logging honest final quotes improves accuracy; keeping your sheet current avoids the stale penalty. <a href="#/how-we-rank">How we rank</a></p>
+        <div class="row">
+          <a class="btn btn-primary" href="#/vendor/leads">Open leads</a>
+          <a class="btn" href="#/vendor/sheet">Edit price sheet</a>
+          <a class="btn" href="#/vendor/availability">Availability</a>
+          <a class="btn btn-ghost" :href="`#/vendors/${d.vendor.id}`">Public profile</a>
+        </div>
+      </div>
+    </div>
+  </template>
+</div>

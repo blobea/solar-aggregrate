@@ -1,0 +1,47 @@
+<div>
+  <div class="page-head">
+    <h1>Reviews</h1>
+    <p>Reply publicly to any review. You can dispute a review only on specific grounds — it stays visible until Ops decides.</p>
+  </div>
+  <template x-if="!list.length"><div class="empty">No reviews yet.</div></template>
+  <div class="stack">
+    <template x-for="r in list" :key="r.id">
+      <article class="card stack-sm" data-testid="vendor-review">
+        <div class="row-between">
+          <div><strong x-text="r.customerName"></strong> <span class="small muted" x-text="`· ${milestoneLabel(r.milestone)} · ${date(r.createdAt)}`"></span></div>
+          <div class="row" style="gap:6px">
+            <span class="badge" :class="r.status === 'pending_check' ? 'badge-new' : ''" x-text="r.status === 'pending_check' ? 'Pending 72-h check' : 'Published'"></span>
+            <span class="badge badge-red" x-show="r.dispute?.outcome === 'removed'">Removed by Ops</span>
+            <span class="badge badge-green" x-show="r.resolvedByVendor">Resolved by vendor</span>
+            <strong x-text="score(r) == null ? 'n/a' : score(r).toFixed(1) + ' / 5'"></strong>
+          </div>
+        </div>
+        <div class="dim-scores"><template x-for="(s, d) in r.scores" :key="d"><span x-text="`${dimLabel(d)}: ${s}` + (r.reasons?.[d] ? ` (${reasonLabel(r.reasons[d])})` : '')"></span></template></div>
+        <p style="margin:0" x-show="r.text" x-text="r.text"></p>
+        <div class="vendor-reply" x-show="r.reply"><strong>Your reply:</strong> <span x-text="r.reply?.text"></span></div>
+        <div class="ops-note" x-show="r.dispute" x-text="disputeText(r)"></div>
+
+        <div class="row" x-show="!r.reply || !r.dispute">
+          <button class="btn btn-sm" type="button" x-show="!r.reply" @click="openReply = r.id; openDispute = null">Reply publicly</button>
+          <button class="btn btn-sm btn-ghost" type="button" x-show="!r.dispute" @click="openDispute = r.id; openReply = null" data-testid="open-dispute">Dispute</button>
+        </div>
+        <form x-show="openReply === r.id" class="stack-sm" @submit.prevent="reply(r.id)">
+          <label :for="'reply-' + r.id">Public reply</label>
+          <textarea :id="'reply-' + r.id" x-model="replyText"></textarea>
+          <div class="row"><button class="btn btn-sm btn-primary" type="submit">Post reply</button><button class="btn btn-sm" type="button" @click="openReply = null">Cancel</button></div>
+        </form>
+        <form x-show="openDispute === r.id" class="stack-sm" @submit.prevent="dispute(r.id)">
+          <label :for="'ground-' + r.id">Ground for dispute</label>
+          <select :id="'ground-' + r.id" x-model="ground" data-testid="dispute-ground">
+            <option value="">Choose…</option>
+            <template x-for="(label, code) in grounds" :key="code"><option :value="code" x-text="label"></option></template>
+          </select>
+          <label :for="'dnote-' + r.id">Explanation & evidence for Ops</label>
+          <textarea :id="'dnote-' + r.id" x-model="disputeNote" data-testid="dispute-note"></textarea>
+          <div class="error-text" x-show="error" x-text="error"></div>
+          <div class="row"><button class="btn btn-sm btn-primary" type="submit" data-testid="submit-dispute">Submit dispute</button><button class="btn btn-sm" type="button" @click="openDispute = null">Cancel</button></div>
+        </form>
+      </article>
+    </template>
+  </div>
+</div>
