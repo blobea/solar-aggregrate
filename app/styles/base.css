@@ -45,6 +45,12 @@ small, .small { font-size: var(--fs-sm); }
 .demo-bar button { cursor: pointer; }
 .demo-bar button:hover { background: #364457; }
 .demo-bar label { display: inline-flex; align-items: center; gap: 6px; }
+@media (max-width: 480px) {
+  .demo-bar { padding: 6px 12px; gap: 6px; font-size: var(--fs-xs); }
+  .demo-bar select, .demo-bar button { font-size: var(--fs-xs); padding: 3px 6px; min-height: 30px; }
+  .demo-bar .demo-label { margin-right: auto; }
+  .demo-bar [data-testid="vendor-switcher"] { max-width: 150px; }
+}
 
 .app-header { background: var(--c-surface); border-bottom: 1px solid var(--c-border); position: sticky; top: 0; z-index: 20; }
 .app-header-inner { max-width: var(--maxw); margin: 0 auto; padding: 0 var(--sp-4); display: flex; align-items: center; gap: var(--sp-4); min-height: 56px; }

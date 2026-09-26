@@ -11,7 +11,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "e2e": "playwright test",
-    "screenshots": "playwright test tests/e2e/screenshots.spec.js"
+    "screenshots": "playwright test tests/e2e/screenshots.spec.js",
+    "typecheck": "npx -y -p typescript@5 tsc -p jsconfig.json"
   },
   "dependencies": {
     "alpinejs": "^3.17.4",

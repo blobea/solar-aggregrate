@@ -45,6 +45,8 @@ section.band { margin-top: var(--sp-6); }
 .compare-table th:first-child, .compare-table td:first-child { position: sticky; left: 0; background: var(--c-surface); z-index: 1; min-width: 140px; }
 .compare-table thead th:first-child { background: var(--c-surface-2); }
 .compare-table td { min-width: 150px; }
+.compare-table td.num { text-align: left; }
+@media (max-width: 480px) { .compare-table th:first-child, .compare-table td:first-child { min-width: 118px; } .compare-table td { min-width: 132px; } }
 .compare-table .best { color: var(--c-success); font-weight: 700; }
 
 /* ---- requests ---- */

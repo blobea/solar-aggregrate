@@ -87,7 +87,7 @@ Alpine.data('shell', () => ({
   },
 }));
 
-window.Alpine = Alpine;
+/** @type {any} */ (window).Alpine = Alpine;
 Alpine.start();
 
 vendors.listVendorNames().then((v) => { Alpine.store('app').vendors = v; });

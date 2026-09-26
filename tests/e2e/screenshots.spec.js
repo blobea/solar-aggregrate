@@ -15,7 +15,9 @@ for (const size of SIZES) {
     await page.goto('/');
     await page.getByTestId('open-demo-drawer').click();
     await page.getByTestId('reset-demo').click();
+    await page.reload();
     await expect(page.locator('h1')).toContainText('Compare rooftop solar');
+    await expect(page.locator('.toast')).toHaveCount(0);
     await shot('home');
 
     // configurator roof step with a drawn roof
@@ -26,9 +28,13 @@ for (const size of SIZES) {
     await expect(map.locator('.leaflet-tile-pane')).toBeAttached();
     await page.waitForLoadState('networkidle').catch(() => {});
     const box = /** @type {{x:number,y:number,width:number,height:number}} */ (await map.boundingBox());
-    const pts = [[0.35, 0.3], [0.65, 0.3], [0.65, 0.62], [0.35, 0.62]];
-    for (const [fx, fy] of pts) await page.mouse.click(box.x + box.width * fx, box.y + box.height * fy);
+    // ~9 m × 7 m at zoom 19 (about 0.3 m per CSS pixel)
+    const cx = box.x + box.width / 2, cy = box.y + box.height / 2;
+    const pts = [[-15, -12], [15, -12], [15, 12], [-15, 12]];
+    for (const [dx, dy] of pts) await page.mouse.click(cx + dx, cy + dy);
     await expect(page.getByText(/Drawn area: \d+ m²/)).toBeVisible();
+    await page.getByRole('button', { name: 'Use drawn area' }).click();
+    await expect(page.getByTestId('roof-area')).not.toHaveValue('');
     await map.scrollIntoViewIfNeeded();
     await page.evaluate(() => window.scrollTo(0, (document.querySelector('[data-testid="roof-map"]')?.getBoundingClientRect().top ?? 0) + window.scrollY - 140));
     await shot('configurator-roof');

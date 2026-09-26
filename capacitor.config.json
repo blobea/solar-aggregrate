@@ -1,0 +1,6 @@
+{
+  "appId": "demo.solarsaral.app",
+  "appName": "SolarSaral Demo",
+  "webDir": "dist",
+  "server": { "androidScheme": "https" }
+}

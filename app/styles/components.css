@@ -118,6 +118,7 @@ table.table { width: 100%; border-collapse: collapse; font-size: var(--fs-sm); }
   position: sticky; bottom: 0; z-index: 15; background: var(--c-surface); border-top: 1px solid var(--c-border);
   box-shadow: 0 -4px 16px rgba(16,24,40,.08); padding: var(--sp-3) var(--sp-4); margin: var(--sp-5) calc(-1 * var(--sp-4)) 0;
 }
+@media (max-width: 480px) { .tray { margin-left: calc(-1 * var(--sp-3)); margin-right: calc(-1 * var(--sp-3)); } }
 
 .empty { text-align: center; padding: var(--sp-6) var(--sp-4); color: var(--c-muted); }
 .kv { display: grid; grid-template-columns: minmax(120px, max-content) 1fr; gap: 6px var(--sp-4); font-size: var(--fs-sm); margin: 0; }
