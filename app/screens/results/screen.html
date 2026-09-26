@@ -1,0 +1,126 @@
+<div>
+  <div class="page-head row-between">
+    <div>
+      <h1>Your solar estimates</h1>
+      <p x-show="res" x-text="headline"></p>
+    </div>
+    <a class="btn btn-sm" href="#/configure?step=1">Edit my home</a>
+  </div>
+
+  <div x-show="loading" class="empty">Calculating estimates from every vendor's price sheet…</div>
+  <div x-show="error" class="alert alert-danger" x-text="error"></div>
+
+  <template x-if="res">
+    <div>
+      <div class="summary">
+        <div class="stat"><div class="stat-label">System size</div><div class="stat-value" data-testid="summary-kw" x-text="`${res.kw} kW`"></div><div class="stat-note" x-text="sizingNote"></div></div>
+        <div class="stat"><div class="stat-label">Generation</div><div class="stat-value" x-text="num(res.savings.monthlyGeneration)"></div><div class="stat-note">units / month (est.)</div></div>
+        <div class="stat"><div class="stat-label">Bill savings</div><div class="stat-value" x-text="inr(res.savings.monthlySavings)"></div><div class="stat-note" x-text="`per month · ${inr(res.savings.annualSavings)}/yr`"></div></div>
+        <div class="stat"><div class="stat-label">Payback</div><div class="stat-value" x-text="res.savings.paybackYears ? `${res.savings.paybackYears} yr` : '—'"></div><div class="stat-note" x-text="`at the median net price ${lakh(res.typicalNet)}`"></div></div>
+      </div>
+
+      <details class="card" style="margin-top:16px" open>
+        <summary style="cursor:pointer;font-weight:600">25-year savings</summary>
+        <div class="chart-box" style="margin-top:12px"><canvas x-ref="chart" aria-label="Line chart of cumulative savings over 25 years versus net system cost" role="img"></canvas></div>
+        <p class="small muted" style="margin:8px 0 0" x-text="`About ${lakh(res.savings.lifetimeSavings)} saved over 25 years, with 0.5%/yr panel degradation and today's tariff.`"></p>
+      </details>
+
+      <div class="toolbar">
+        <div class="field">
+          <label for="sort">Sort by</label>
+          <select id="sort" x-model="sort" @change="load()" data-testid="sort">
+            <option value="best">Best match</option>
+            <option value="price">Lowest price</option>
+            <option value="rating">Highest rating</option>
+            <option value="accuracy">Most accurate quotes</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="filter">Show</label>
+          <select id="filter" x-model="filter">
+            <option value="all">All eligible vendors</option>
+            <option value="fresh">Up-to-date price sheets</option>
+            <option value="accurate">Accuracy within ±10%</option>
+            <option value="rated">Rated 4.0 and above</option>
+          </select>
+        </div>
+        <p class="small muted" style="margin:0 0 10px"><span x-text="visible.length"></span> of <span x-text="res.organic.length"></span> vendors · <a href="#/how-we-rank">How we rank</a></p>
+      </div>
+      <p class="disclaimer" x-text="disclaimer"></p>
+
+      <div class="stack" data-testid="vendor-list">
+        <template x-for="c in cards" :key="(c.sponsoredSlot ? 's-' : 'o-') + c.vendorId">
+          <article class="card vendor-card" :class="{ sponsored: c.sponsoredSlot, 'is-selected': inCompare(c.vendorId) }"
+            :data-testid="c.sponsoredSlot ? 'sponsored-card' : 'vendor-card'" :data-vendor="c.vendorId" :aria-label="c.vendorName + (c.sponsoredSlot ? ' (sponsored)' : '')">
+            <div class="row-between">
+              <div>
+                <div class="sponsored-label" x-show="c.sponsoredSlot">Sponsored</div>
+                <h2 class="card-title"><span x-show="!c.sponsoredSlot && sort === 'best'" class="muted" x-text="`${c.position}. `"></span><span x-text="c.vendorName"></span></h2>
+                <div class="card-sub" x-text="c.tagline"></div>
+              </div>
+              <div class="meta">
+                <span class="stars" aria-hidden="true" x-text="stars(c.rating)"></span>
+                <span class="small" x-text="`${c.rating.toFixed(1)} (${c.ratingCount})`" :aria-label="`Rated ${c.rating.toFixed(1)} out of 5 from ${c.ratingCount} reviews`"></span>
+                <span class="badge" :class="badgeClass(c.accuracy.badge)" x-text="c.accuracy.label" data-testid="accuracy-badge"></span>
+              </div>
+            </div>
+            <div class="price-row">
+              <div>
+                <div class="small muted">Net price (after subsidy)</div>
+                <div class="price" x-text="lakhRange(c.estimate.low, c.estimate.high)"></div>
+              </div>
+              <div class="small">
+                <div>Gross <strong x-text="inr(c.estimate.gross)"></strong></div>
+                <div>Subsidy <strong x-text="c.estimate.subsidy ? '−' + inr(c.estimate.subsidy) : 'none'"></strong></div>
+              </div>
+            </div>
+            <div class="facts">
+              <div><span>Package</span><span x-text="`${c.package.name} · ${c.package.dcr ? 'DCR' : 'non-DCR'}`"></span></div>
+              <div><span>Panels</span><span x-text="c.package.panel"></span></div>
+              <div><span>Inverter</span><span x-text="c.package.inverter"></span></div>
+              <div><span>Workmanship warranty</span><span x-text="`${c.workmanshipWarrantyYears} years`"></span></div>
+              <div><span>Lead time</span><span x-text="`${c.estimate.leadTimeDays} days`"></span></div>
+              <div><span>Price sheet</span><span x-text="`Prices updated ${daysAgo(c.updatedDaysAgo)}`"></span></div>
+            </div>
+            <template x-if="c.stale"><div class="alert alert-warn" role="note">Prices may be outdated — this vendor's price sheet has expired. Ranked lower until refreshed.</div></template>
+            <template x-for="w in c.estimate.warnings.filter(x => !x.startsWith('Prices may'))" :key="w"><div class="small" style="color:var(--c-warning)" x-text="'⚠ ' + w"></div></template>
+            <details>
+              <summary class="small" style="cursor:pointer">What's included</summary>
+              <table class="table" style="margin-top:8px">
+                <tbody>
+                  <template x-for="li in c.estimate.lineItems" :key="li.code"><tr><td x-text="li.label"></td><td class="num" x-text="inr(li.amount)"></td></tr></template>
+                  <tr><td><strong>Gross (all-in)</strong></td><td class="num"><strong x-text="inr(c.estimate.gross)"></strong></td></tr>
+                  <tr><td>Central subsidy (computed by SolarSaral)</td><td class="num" x-text="'−' + inr(c.estimate.subsidy)"></td></tr>
+                  <tr><td><strong>Net</strong></td><td class="num"><strong x-text="inr(c.estimate.net)"></strong></td></tr>
+                </tbody>
+              </table>
+            </details>
+            <div class="actions">
+              <button class="btn btn-sm toggle-btn" type="button" :aria-pressed="inCompare(c.vendorId)" @click="toggleCompare(c.vendorId)" data-testid="compare-toggle"
+                x-text="inCompare(c.vendorId) ? '✓ Comparing' : '+ Compare'"></button>
+              <a class="btn btn-sm btn-ghost" :href="`#/vendors/${c.vendorId}`">Profile & reviews</a>
+            </div>
+          </article>
+        </template>
+        <template x-if="!visible.length"><div class="empty">No vendors match this filter.</div></template>
+      </div>
+
+      <details class="card" style="margin-top:16px" x-show="res.ineligible.length">
+        <summary style="cursor:pointer" x-text="`${res.ineligible.length} vendor(s) can't quote for this home`"></summary>
+        <ul class="small" style="margin:8px 0 0">
+          <template x-for="v in res.ineligible" :key="v.vendorId"><li><strong x-text="v.vendorName"></strong>: <span x-text="v.reasons.join('; ')"></span></li></template>
+        </ul>
+      </details>
+
+      <div class="tray" x-show="compare.length" x-transition>
+        <div class="row-between">
+          <span class="small"><strong x-text="compare.length"></strong>/3 selected</span>
+          <div class="row">
+            <a class="btn btn-sm" href="#/compare" data-testid="go-compare" :aria-disabled="compare.length < 2" @click="if (compare.length < 2) { $event.preventDefault(); $store.app.toast('Pick at least 2 vendors to compare'); }">Compare</a>
+            <a class="btn btn-sm btn-primary" href="#/request" data-testid="go-request">Request surveys</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </template>
+</div>

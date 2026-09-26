@@ -1,0 +1,192 @@
+<div class="wizard">
+  <div class="page-head">
+    <h1>Tell us about your home</h1>
+    <div class="progress" role="progressbar" aria-label="Configurator progress" :aria-valuenow="step" aria-valuemin="1" aria-valuemax="5">
+      <span :style="`width:${step * 20}%`"></span>
+    </div>
+    <div class="steps">
+      <template x-for="(s, i) in stepNames" :key="i">
+        <span :aria-current="step === i + 1 ? 'step' : null" x-text="`${i + 1}. ${s}`"></span>
+      </template>
+    </div>
+  </div>
+
+  <form class="card card-lg" @submit.prevent="next()" novalidate>
+    <!-- Step 1: location -->
+    <section x-show="step === 1" aria-labelledby="s1">
+      <h2 id="s1">Where is your home?</h2>
+      <div class="field">
+        <label for="pincode">Pincode</label>
+        <input id="pincode" type="text" inputmode="numeric" maxlength="6" list="pincodes" autocomplete="postal-code"
+          x-model="config.pincode" :aria-invalid="!!errors.pincode" aria-describedby="pincode-hint pincode-err" data-testid="pincode" />
+        <datalist id="pincodes">
+          <template x-for="p in pincodes" :key="p.pincode"><option :value="p.pincode" x-text="p.area"></option></template>
+        </datalist>
+        <div id="pincode-hint" class="hint" x-text="areaName ? `📍 ${areaName}, Bengaluru` : 'Demo covers 15 Bengaluru pincodes, e.g. 560102 (HSR Layout).'"></div>
+        <div id="pincode-err" class="error-text" x-show="errors.pincode" x-text="errors.pincode"></div>
+      </div>
+    </section>
+
+    <!-- Step 2: roof -->
+    <section x-show="step === 2" aria-labelledby="s2">
+      <h2 id="s2">Your roof</h2>
+      <p class="muted small">Tap each corner of your usable roof on the map. We'll work out the area. Or type it in below.</p>
+      <div class="map" x-ref="map" role="application" aria-label="Map: tap roof corners to draw your roof" data-testid="roof-map"></div>
+      <div class="map-tools">
+        <button class="btn btn-sm" type="button" @click="mapApi && mapApi.undo()" :disabled="!drawnPoints">Undo corner</button>
+        <button class="btn btn-sm" type="button" @click="mapApi && mapApi.clear()" :disabled="!drawnPoints">Clear</button>
+        <span class="small" aria-live="polite" x-text="drawnArea ? `Drawn area: ${drawnArea} m² (${drawnPoints} corners)` : 'No roof drawn yet'"></span>
+        <button class="btn btn-sm btn-primary" type="button" x-show="drawnArea" @click="config.roofAreaSqm = drawnArea">Use drawn area</button>
+      </div>
+      <div class="grid-2" style="margin-top:16px">
+        <div class="field">
+          <label for="area">Usable roof area (m²)</label>
+          <input id="area" type="number" min="5" max="2000" step="1" x-model.number="config.roofAreaSqm" :aria-invalid="!!errors.roofAreaSqm" data-testid="roof-area" />
+          <div class="hint">Shade-free area. About 6.5 m² per kW.</div>
+          <div class="error-text" x-show="errors.roofAreaSqm" x-text="errors.roofAreaSqm"></div>
+        </div>
+        <div class="field">
+          <label for="floors">Floors in the building</label>
+          <input id="floors" type="number" min="1" max="10" x-model.number="config.floors" :aria-invalid="!!errors.floors" />
+          <div class="hint">Above 2 floors, vendors may add a height charge.</div>
+          <div class="error-text" x-show="errors.floors" x-text="errors.floors"></div>
+        </div>
+      </div>
+      <fieldset>
+        <legend>Roof type</legend>
+        <div class="seg">
+          <template x-for="(label, key) in roofLabels" :key="key">
+            <label><input type="radio" name="roofType" :value="key" x-model="config.roofType" /><span x-text="label"></span></label>
+          </template>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>Mounting structure</legend>
+        <div class="seg">
+          <template x-for="(label, key) in structureLabels" :key="key">
+            <label><input type="radio" name="structure" :value="key" x-model="config.structure" /><span x-text="label"></span></label>
+          </template>
+        </div>
+        <div class="hint">Elevated structures keep the terrace usable underneath.</div>
+      </fieldset>
+    </section>
+
+    <!-- Step 3: usage -->
+    <section x-show="step === 3" aria-labelledby="s3">
+      <h2 id="s3">Your electricity use</h2>
+      <fieldset>
+        <legend>I know my…</legend>
+        <div class="seg">
+          <label><input type="radio" name="usageMode" value="units" x-model="usageMode" /><span>Monthly units (kWh)</span></label>
+          <label><input type="radio" name="usageMode" value="bill" x-model="usageMode" /><span>Monthly bill (₹)</span></label>
+        </div>
+      </fieldset>
+      <div class="grid-2">
+        <div class="field" x-show="usageMode === 'units'">
+          <label for="units">Average monthly units</label>
+          <input id="units" type="number" min="30" max="5000" x-model.number="config.monthlyUnits" :aria-invalid="!!errors.monthlyUnits" data-testid="units" />
+          <div class="error-text" x-show="errors.monthlyUnits" x-text="errors.monthlyUnits"></div>
+        </div>
+        <div class="field" x-show="usageMode === 'bill'">
+          <label for="bill">Average monthly bill (₹)</label>
+          <input id="bill" type="number" min="200" max="50000" x-model.number="billAmount" @input.debounce.300ms="convertBill()" />
+          <div class="hint" x-show="config.monthlyUnits" x-text="`≈ ${config.monthlyUnits} units/month at BESCOM tariff`"></div>
+          <div class="error-text" x-show="errors.monthlyUnits" x-text="errors.monthlyUnits"></div>
+        </div>
+        <div class="field">
+          <label for="load">Sanctioned load (kW)</label>
+          <input id="load" type="number" min="1" max="25" step="0.5" x-model.number="config.sanctionedLoadKw" :aria-invalid="!!errors.sanctionedLoadKw" />
+          <div class="hint">Printed on your BESCOM bill. Solar size can't exceed it.</div>
+          <div class="error-text" x-show="errors.sanctionedLoadKw" x-text="errors.sanctionedLoadKw"></div>
+        </div>
+      </div>
+      <div class="card" style="background:var(--c-primary-soft);border-color:#a9dcc6" x-show="sizing">
+        <div class="row-between">
+          <div>
+            <div class="small muted">Recommended system</div>
+            <div class="kw-readout"><span x-text="kwValue"></span> kW</div>
+            <div class="small" x-text="sizingNote"></div>
+          </div>
+          <div class="small" style="text-align:right">
+            <div x-text="`≈ ${generation} units/month`"></div>
+            <div class="muted" x-text="`Limits: ${sizing?.minKw}–${sizing?.maxKw} kW`"></div>
+          </div>
+        </div>
+        <label for="kw" class="sr-only">System size in kW</label>
+        <input id="kw" type="range" :min="sizing?.minKw" :max="sizing?.maxKw" step="0.5" :value="kwValue" @input="setKw($event.target.value)" data-testid="kw-slider" />
+        <button class="btn btn-ghost btn-sm" type="button" x-show="config.kw" @click="config.kw = null; refreshSizing()">Reset to recommended</button>
+      </div>
+    </section>
+
+    <!-- Step 4: preferences -->
+    <section x-show="step === 4" aria-labelledby="s4">
+      <h2 id="s4">Preferences</h2>
+      <fieldset>
+        <legend>Central subsidy</legend>
+        <label class="check"><input type="checkbox" x-model="config.prefs.subsidy" data-testid="subsidy" />
+          <span>Yes, I want the subsidy (up to ₹78,000)</span></label>
+        <div class="alert alert-info" style="margin-top:8px">
+          The subsidy needs <strong>DCR panels</strong> (solar cells made in India). They cost a little more per kW, but the subsidy more than covers it for homes. We compute the subsidy ourselves — vendors can't change it.
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>Quality tier</legend>
+        <div class="seg">
+          <template x-for="(label, key) in tierLabels" :key="key">
+            <label><input type="radio" name="tier" :value="key" x-model="config.prefs.tier" /><span x-text="label"></span></label>
+          </template>
+        </div>
+        <div class="hint">Economy: proven PERC panels. Standard: TOPCon panels, better inverters. Premium: top-bin panels and long warranties.</div>
+      </fieldset>
+      <fieldset>
+        <legend>Battery backup</legend>
+        <div class="seg">
+          <template x-for="b in [0, 5, 10]" :key="b">
+            <label><input type="radio" name="battery" :value="b" :checked="config.prefs.battery === b" @change="config.prefs.battery = b" /><span x-text="b ? `${b} kWh` : 'None'"></span></label>
+          </template>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>EV charger</legend>
+        <div class="seg">
+          <template x-for="e in [0, 3.3, 7.4]" :key="e">
+            <label><input type="radio" name="ev" :value="e" :checked="config.prefs.evCharger === e" @change="config.prefs.evCharger = e" /><span x-text="e ? `${e} kW` : 'None'"></span></label>
+          </template>
+        </div>
+      </fieldset>
+      <label class="check"><input type="checkbox" x-model="config.prefs.finance" /> <span>I'm interested in financing (EMI) options</span></label>
+    </section>
+
+    <!-- Step 5: verify phone -->
+    <section x-show="step === 5" aria-labelledby="s5">
+      <h2 id="s5">Verify your phone to see estimates</h2>
+      <template x-if="$store.app.session.customerId">
+        <div class="alert alert-success">Signed in as <strong x-text="$store.app.session.phone"></strong>. You're ready.</div>
+      </template>
+      <template x-if="!$store.app.session.customerId">
+        <div>
+          <p class="muted small">We only use your number to save your estimates. Vendors never see it unless you request a survey.</p>
+          <div class="field">
+            <label for="phone">Mobile number</label>
+            <div class="row" style="flex-wrap:nowrap">
+              <input id="phone" type="tel" inputmode="numeric" autocomplete="tel-national" placeholder="98765 43210" x-model="phone" data-testid="phone" />
+              <button class="btn" type="button" @click="sendOtp()" data-testid="send-otp">Send code</button>
+            </div>
+          </div>
+          <div class="field" x-show="otpSent">
+            <label for="otp">6-digit code</label>
+            <input id="otp" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="6" x-model="otp" data-testid="otp" />
+            <div class="hint" x-text="otpHint"></div>
+          </div>
+          <div class="error-text" x-show="errors.phone" x-text="errors.phone"></div>
+        </div>
+      </template>
+    </section>
+
+    <div class="wizard-nav">
+      <button class="btn" type="button" @click="back()" :disabled="step === 1">Back</button>
+      <button class="btn btn-primary" type="submit" data-testid="next" x-text="step === 5 ? 'See my estimates' : 'Next'"></button>
+    </div>
+  </form>
+  <p class="disclaimer" style="margin-top:12px">Your answers are saved as you go.</p>
+</div>

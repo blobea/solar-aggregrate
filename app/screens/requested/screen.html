@@ -1,0 +1,17 @@
+<div style="max-width:640px;margin:0 auto" class="stack">
+  <div class="card card-lg" style="text-align:center">
+    <div style="font-size:48px" aria-hidden="true">✅</div>
+    <h1>Survey requests sent</h1>
+    <p class="muted">These vendors have your details and will contact you to schedule a survey, usually within 2 working days.</p>
+    <ul style="list-style:none;padding:0;margin:16px 0" class="stack-sm">
+      <template x-for="l in leads" :key="l.id">
+        <li class="card" style="text-align:left">
+          <strong x-text="l.vendorName"></strong>
+          <div class="small muted" x-text="`Estimate you saw: ${lakhRange(l.estimate.low, l.estimate.high)} (net ${inr(l.estimate.net)})`"></div>
+        </li>
+      </template>
+    </ul>
+    <p class="small">We'll ask you for a quick review after the survey and after installation. It helps other homeowners.</p>
+    <a class="btn btn-primary" href="#/my-requests" data-testid="go-my-requests">Track my requests</a>
+  </div>
+</div>

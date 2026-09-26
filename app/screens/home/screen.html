@@ -1,0 +1,46 @@
+<section class="hero">
+  <div>
+    <span class="badge badge-sun">Bengaluru · BESCOM</span>
+    <h1 style="margin-top:12px">Compare rooftop solar quotes from every vendor, side by side.</h1>
+    <p class="lead">Describe your home once. See all-in estimates — panels, structure, net-meter fees, subsidy — computed from each vendor's own price sheet. Pick up to 3 for a free site survey.</p>
+    <div class="row" style="margin-top:20px">
+      <a class="btn btn-primary btn-lg" href="#/configure" data-testid="cta-estimates">Get my estimates</a>
+      <button class="btn btn-lg" type="button" data-testid="demo-customer" @click="demoCustomer()">Try the demo customer</button>
+    </div>
+    <p class="small muted" style="margin-top:12px">Free for homeowners. We never handle payment — vendors do the installation.</p>
+  </div>
+  <div class="hero-card" aria-label="Example estimate">
+    <div class="small muted">Example · 4 kW in HSR Layout</div>
+    <div class="big" x-text="example"></div>
+    <div class="small">net, after the ₹78,000 central subsidy</div>
+    <hr class="divider" />
+    <div class="grid-4" style="grid-template-columns:repeat(3,1fr)">
+      <div><div class="stat-label">Vendors</div><div class="stat-value" x-text="vendorCount"></div></div>
+      <div><div class="stat-label">Generation</div><div class="stat-value">504</div><div class="stat-note">units / month</div></div>
+      <div><div class="stat-label">Payback</div><div class="stat-value">~4 yr</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="band" aria-labelledby="how-title">
+  <h2 id="how-title">How it works</h2>
+  <ol class="steps-4">
+    <li><h3>Describe your roof</h3><p class="muted small">Pincode, draw your roof on the map, and your monthly units.</p></li>
+    <li><h3>See every estimate</h3><p class="muted small">All-in prices from each eligible vendor, with the subsidy worked out for you.</p></li>
+    <li><h3>Compare honestly</h3><p class="muted small">Ratings, and how close each vendor's final quotes land to their estimates.</p></li>
+    <li><h3>Request surveys</h3><p class="muted small">Choose up to 3 vendors. Only they get your details, and only with your consent.</p></li>
+  </ol>
+</section>
+
+<section class="band" aria-labelledby="trust-title">
+  <h2 id="trust-title">Why trust these numbers</h2>
+  <ul class="trust">
+    <li><div><strong>All-in prices</strong><br /><span class="muted small">Fixed charges, structure, height and travel are always included.</span></div></li>
+    <li><div><strong>Subsidy computed by us</strong><br /><span class="muted small">Vendors can't inflate it. DCR panels only, as the scheme requires.</span></div></li>
+    <li><div><strong>Accuracy tracked</strong><br /><span class="muted small">Every final quote is compared with the estimate you saw.</span></div></li>
+    <li><div><strong>Reviews at milestones</strong><br /><span class="muted small">Survey, installation and 6–12 months later. Negative reviews are never auto-hidden.</span></div></li>
+    <li><div><strong>Sponsored is labelled</strong><br /><span class="muted small">At most one sponsored slot, and it never changes the ranking.</span></div></li>
+    <li><div><strong>Your data, your call</strong><br /><span class="muted small">Details are shared only with vendors you pick.</span></div></li>
+  </ul>
+  <p style="margin-top:20px"><a href="#/how-we-rank">How we rank vendors →</a> &nbsp; <a href="#/review-policy">Review policy →</a></p>
+</section>

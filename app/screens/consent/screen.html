@@ -1,0 +1,37 @@
+<div style="max-width:640px;margin:0 auto">
+  <div class="page-head">
+    <h1>Share your details</h1>
+    <p>Vendors need your contact details and address to schedule a survey. Nothing is shared until you agree below.</p>
+  </div>
+  <form class="card card-lg" @submit.prevent="submit()" novalidate>
+    <div class="field">
+      <label for="name">Your name</label>
+      <input id="name" type="text" autocomplete="name" x-model="name" data-testid="consent-name" />
+    </div>
+    <div class="field">
+      <label for="address">Installation address</label>
+      <textarea id="address" autocomplete="street-address" x-model="address" data-testid="consent-address"></textarea>
+    </div>
+    <div class="field">
+      <span class="label">Phone</span>
+      <div x-text="$store.app.session.phone"></div>
+    </div>
+
+    <div class="alert alert-info" style="margin-bottom:16px">
+      <strong>What will be shared:</strong> your name, phone, address and home configuration (roof, usage, preferences), plus the estimate you saw.
+      <br /><strong>With:</strong> <span x-text="vendorNames || '—'"></span>
+      <br />No other vendor will see your details.
+    </div>
+
+    <label class="check" style="margin-bottom:16px">
+      <input type="checkbox" x-model="consent" data-testid="consent-checkbox" />
+      <span>Share my name, phone, address and configuration with: <strong x-text="vendorNames"></strong></span>
+    </label>
+
+    <div class="error-text" x-show="error" x-text="error" role="alert" style="margin-bottom:12px"></div>
+    <div class="row-between">
+      <a class="btn" href="#/request">Back</a>
+      <button class="btn btn-primary" type="submit" :disabled="busy" data-testid="consent-submit">Send survey requests</button>
+    </div>
+  </form>
+</div>

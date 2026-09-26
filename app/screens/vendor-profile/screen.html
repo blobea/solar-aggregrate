@@ -1,0 +1,83 @@
+<div>
+  <template x-if="v">
+    <div class="stack">
+      <div class="page-head" style="margin-bottom:0">
+        <a class="small" href="#/results">← Back to results</a>
+        <h1 style="margin-top:8px" x-text="v.name"></h1>
+        <p x-text="v.tagline"></p>
+        <div class="chip-list">
+          <span class="badge" x-text="`MNRE reg. ${v.mnreRegNo}`"></span>
+          <span class="badge" x-text="`GSTIN ${v.gstin}`"></span>
+          <span class="badge" x-text="`Since ${v.since}`"></span>
+          <span class="badge" x-text="`${num(v.installsCompleted)} installs`"></span>
+          <span class="badge badge-primary" x-show="v.vetting === 'approved'">Vetted by SolarSaral</span>
+        </div>
+      </div>
+
+      <div class="grid-4" data-testid="vendor-metrics">
+        <div class="stat"><div class="stat-label">Rating</div>
+          <div class="stat-value" data-testid="profile-rating" x-text="v.metrics.rating.toFixed(2)"></div>
+          <div class="stat-note"><span class="stars" aria-hidden="true" x-text="stars(v.metrics.rating)"></span> <span x-text="`${v.metrics.ratingCount} reviews`"></span></div></div>
+        <div class="stat"><div class="stat-label">Quote accuracy</div>
+          <div style="margin:6px 0"><span class="badge" :class="badgeClass(v.metrics.accuracy.badge)" data-testid="profile-accuracy" x-text="v.metrics.accuracy.label"></span></div>
+          <div class="stat-note" x-text="`Median of last ${v.metrics.accuracy.count} final quotes`"></div></div>
+        <div class="stat"><div class="stat-label">Price sheet</div>
+          <div class="stat-value" style="font-size:var(--fs-lg)" x-text="v.metrics.stale ? 'Expired' : 'Current'" :style="v.metrics.stale ? 'color:var(--c-warning)' : ''"></div>
+          <div class="stat-note" x-text="`Updated ${daysAgo(v.metrics.updatedDaysAgo)}`"></div></div>
+        <div class="stat"><div class="stat-label">Replies</div>
+          <div class="stat-value" x-text="v.metrics.replyRate == null ? '—' : v.metrics.replyRate + '%'"></div>
+          <div class="stat-note" x-text="`${v.metrics.resolvedByVendor} resolved by vendor · ${v.metrics.disputes} disputed`"></div></div>
+      </div>
+
+      <div class="card">
+        <h2 class="card-title" style="margin-bottom:8px">About</h2>
+        <p x-text="v.about"></p>
+        <dl class="kv" x-show="v.public">
+          <dt>System sizes</dt><dd x-text="v.public ? `${v.public.kwRange[0]}–${v.public.kwRange[1]} kW` : ''"></dd>
+          <dt>Tiers</dt><dd x-text="v.public ? v.public.tiers.join(', ') : ''"></dd>
+          <dt>Workmanship warranty</dt><dd x-text="v.public ? `${v.public.workmanshipWarrantyYears} years` : ''"></dd>
+          <dt>Payment terms</dt><dd x-text="v.public?.paymentMilestones"></dd>
+          <dt>Equipment</dt><dd x-text="v.public ? v.public.brands.join(', ') : ''"></dd>
+          <dt>Service areas</dt><dd x-text="areas"></dd>
+          <dt>Languages</dt><dd x-text="v.languages.join(', ')"></dd>
+        </dl>
+      </div>
+
+      <section class="card" aria-labelledby="rev-title">
+        <div class="row-between">
+          <h2 id="rev-title" class="card-title" x-text="`Reviews (${filtered.length})`"></h2>
+          <a class="small" href="#/review-policy">Review policy</a>
+        </div>
+        <div class="toolbar" style="margin-top:8px">
+          <div class="field"><label for="f-m">Milestone</label>
+            <select id="f-m" x-model="fMilestone"><option value="">All</option><option value="survey">Survey</option><option value="install">Installation</option><option value="longterm">Long-term</option></select></div>
+          <div class="field"><label for="f-s">Score</label>
+            <select id="f-s" x-model="fScore"><option value="">All</option><option value="low">Critical (≤ 2.5)</option><option value="high">Positive (≥ 4)</option></select></div>
+          <label class="check small" style="margin-bottom:12px"><input type="checkbox" x-model="fReply" /> With vendor reply</label>
+        </div>
+        <template x-if="!filtered.length"><p class="empty">No reviews yet.</p></template>
+        <template x-for="r in filtered" :key="r.id">
+          <article class="review" data-testid="review">
+            <div class="row-between">
+              <div><strong x-text="r.customerName"></strong> <span class="small muted" x-text="`· ${milestoneLabel(r.milestone)} · ${date(r.createdAt)}`"></span></div>
+              <div class="row" style="gap:6px">
+                <span class="badge badge-green" x-show="r.resolvedByVendor">Resolved by vendor</span>
+                <span class="stars" aria-hidden="true" x-text="stars(score(r) ?? 0)"></span>
+                <span class="small" x-text="score(r) == null ? 'n/a' : score(r).toFixed(1)"></span>
+              </div>
+            </div>
+            <div class="dim-scores" style="margin:4px 0">
+              <template x-for="(s, d) in r.scores" :key="d"><span x-text="`${dimLabel(d)}: ${s}` + (r.reasons?.[d] ? ` (${reasonLabel(r.reasons[d])})` : '')"></span></template>
+            </div>
+            <p style="margin:4px 0" x-show="r.text" x-text="r.text"></p>
+            <div class="small muted" x-show="hasExternal(r)">Some low scores cite causes outside the vendor's control and are excluded from the vendor's rating.</div>
+            <div class="vendor-reply" x-show="r.reply"><strong>Vendor reply:</strong> <span x-text="r.reply?.text"></span></div>
+            <div class="ops-note" x-show="r.dispute?.outcome === 'open'">The vendor has disputed this review (<span x-text="groundLabel(r.dispute?.ground)"></span>). It stays visible while SolarSaral reviews it.</div>
+            <div class="ops-note" x-show="r.dispute?.outcome === 'annotated'"><strong>SolarSaral note:</strong> <span x-text="r.dispute?.opsNote"></span></div>
+            <div class="ops-note" x-show="r.dispute?.outcome === 'stands'">Vendor dispute reviewed by SolarSaral — the review stands.</div>
+          </article>
+        </template>
+      </section>
+    </div>
+  </template>
+</div>

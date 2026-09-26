@@ -1,0 +1,36 @@
+<div class="prose">
+  <div class="page-head">
+    <h1>Review policy</h1>
+    <p>Reviews on SolarSaral come only from customers who requested a survey through us, at real milestones.</p>
+  </div>
+
+  <h2>When you can review</h2>
+  <ul>
+    <template x-for="(m, key) in milestones" :key="key">
+      <li><strong x-text="m.label"></strong> — <span x-text="m.dims.map(d => dims[d]).join(', ')"></span> <span class="muted" x-text="`(weight ${m.weight}×)`"></span></li>
+    </template>
+  </ul>
+  <p>The survey review opens once the vendor marks the survey done and you confirm it. Installation reviews need evidence (an invoice number or photo). Long-term reviews need a generation reading.</p>
+
+  <h2>Low scores need a reason</h2>
+  <p>Any score of 2 or less needs a reason:</p>
+  <ul class="chip-list" style="list-style:none;padding:0">
+    <template x-for="(label, code) in reasons" :key="code"><li><span class="badge" :class="external.includes(code) ? 'badge-new' : ''" x-text="label"></span></li></template>
+  </ul>
+  <p>DISCOM delays and subsidy-portal delays are shown on the review but <strong>excluded from the vendor's score</strong>, because they are outside the vendor's control.</p>
+
+  <h2>Publishing</h2>
+  <p>Every review — positive or negative — goes through the same 72-hour check and is then published. Negative reviews are never auto-hidden.</p>
+
+  <h2>Vendor replies and disputes</h2>
+  <ul>
+    <li>Vendors can reply publicly to any review.</li>
+    <li>Vendors can dispute a review only on these grounds: <span x-text="Object.values(grounds).join(', ')"></span>.</li>
+    <li>A disputed review stays visible while our Ops team looks at the review, the vendor's grounds and the evidence.</li>
+    <li>Ops decides: <strong>removed</strong> (e.g. not a customer, abusive), <strong>annotated</strong> (context added) or <strong>stands</strong>. The decision and note are recorded.</li>
+    <li>You can mark a review "Resolved by vendor" if they fixed the problem. The tag is shown publicly.</li>
+  </ul>
+
+  <h2>Sponsorship</h2>
+  <p>Paying for the sponsored slot has no effect on reviews, ratings or accuracy.</p>
+</div>

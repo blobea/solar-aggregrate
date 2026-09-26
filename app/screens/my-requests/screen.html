@@ -1,0 +1,68 @@
+<div>
+  <div class="page-head">
+    <h1>My requests</h1>
+    <p>Track each vendor from survey to installation. We'll ask for a short review at each milestone.</p>
+  </div>
+
+  <template x-if="!$store.app.session.customerId">
+    <div class="empty">Verify your phone to see your requests. <a href="#/configure?step=5">Sign in</a></div>
+  </template>
+  <template x-if="$store.app.session.customerId && !loading && !leads.length">
+    <div class="empty">No survey requests yet. <a href="#/configure">Get estimates</a></div>
+  </template>
+
+  <div class="stack">
+    <template x-for="l in leads" :key="l.id">
+      <article class="card request-card stack-sm" :data-testid="'request-' + l.vendorId">
+        <div class="head">
+          <div>
+            <h2 class="card-title" x-text="l.vendorName"></h2>
+            <div class="small muted" x-text="`Requested ${date(l.createdAt)} · ${l.estimate.kw} kW · ${l.estimate.packageName}`"></div>
+          </div>
+          <span class="badge badge-primary" data-testid="request-status" x-text="statusLabel(l.status)"></span>
+        </div>
+        <ol class="timeline" aria-label="Progress">
+          <template x-for="(s, i) in flow" :key="s">
+            <li :class="{ done: i <= flow.indexOf(l.status), current: s === l.status }" x-text="statusLabel(s)"></li>
+          </template>
+        </ol>
+        <div class="vs">
+          <div class="stat"><div class="stat-label">Estimate you saw</div><div class="stat-value" style="font-size:var(--fs-lg)" x-text="inr(l.estimate.net)"></div><div class="stat-note" x-text="lakhRange(l.estimate.low, l.estimate.high)"></div></div>
+          <div class="stat"><div class="stat-label">Final quote</div>
+            <div class="stat-value" style="font-size:var(--fs-lg)" x-text="l.finalQuote ? inr(l.finalQuote.amount) : 'Awaiting survey'"></div>
+            <div class="stat-note" x-show="l.finalQuote" :style="deviation(l) > 10 ? 'color:var(--c-danger)' : ''" x-text="l.finalQuote ? `${deviation(l) >= 0 ? '+' : ''}${deviation(l)}% vs estimate` : ''"></div>
+          </div>
+        </div>
+
+        <template x-if="l.survey.doneAt && !l.survey.confirmedByCustomer">
+          <div class="alert alert-info row-between">
+            <span>The vendor marked the survey as done. Did it happen?</span>
+            <button class="btn btn-sm btn-primary" type="button" @click="confirmSurvey(l.id)">Yes, confirm survey</button>
+          </div>
+        </template>
+
+        <template x-for="m in prompts(l)" :key="m">
+          <div class="alert alert-success row-between">
+            <span x-text="promptText(m)"></span>
+            <a class="btn btn-sm btn-primary" :href="`#/review/${l.id}/${m}`" :data-testid="'review-prompt-' + m">Leave a review</a>
+          </div>
+        </template>
+
+        <template x-for="r in reviewsFor(l)" :key="r.id">
+          <div class="small card" style="background:var(--c-surface-2)">
+            <div class="row-between">
+              <span><strong x-text="milestoneLabel(r.milestone)"></strong> review ·
+                <span x-text="r.status === 'pending_check' ? 'Pending 72-hour check' : 'Published'"></span>
+                <span x-show="r.dispute" x-text="r.dispute ? ` · Disputed by vendor (${r.dispute.outcome === 'open' ? 'under review' : r.dispute.outcome})` : ''"></span>
+              </span>
+              <span x-show="r.resolvedByVendor" class="badge badge-green">Resolved by vendor</span>
+              <button class="btn btn-sm" type="button" x-show="!r.resolvedByVendor && Object.values(r.scores).some(s => s <= 2)" @click="resolved(r.id)">Mark resolved by vendor</button>
+            </div>
+            <div class="vendor-reply" x-show="r.reply" x-text="r.reply ? `Vendor replied: ${r.reply.text}` : ''"></div>
+          </div>
+        </template>
+        <a class="small" :href="`#/vendors/${l.vendorId}`">Vendor profile</a>
+      </article>
+    </template>
+  </div>
+</div>

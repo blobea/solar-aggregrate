@@ -3,7 +3,7 @@
 /**
  * Weights for "Best match". Shown verbatim on the How-we-rank page. Must sum to 1.
  */
-export const RANKING_WEIGHTS = { price: 0.4, rating: 0.25, accuracy: 0.25, freshness: 0.1 };
+export const RANKING_WEIGHTS = { price: 0.35, rating: 0.25, accuracy: 0.3, freshness: 0.1 };
 export const SPONSOR_RULES = { minRating: 3.5, maxSlots: 1 };
 export const FRESHNESS_FULL_DAYS = 30;
 export const FRESHNESS_ZERO_DAYS = 120;

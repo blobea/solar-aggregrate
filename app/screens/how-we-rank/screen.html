@@ -1,0 +1,41 @@
+<div class="prose">
+  <div class="page-head">
+    <h1>How we rank vendors</h1>
+    <p>SolarSaral is neutral. Vendors can't pay to change their position in the list. Here is exactly how "Best match" works.</p>
+  </div>
+
+  <h2>Best match score</h2>
+  <p>Each eligible vendor gets a score from four signals, each scaled from 0 to 1, then weighted:</p>
+  <div class="card" style="margin-bottom:16px">
+    <template x-for="w in weights" :key="w.key">
+      <div class="weight-bar">
+        <span x-text="w.label"></span>
+        <span class="bar" aria-hidden="true"><span :style="`width:${w.value * 100}%`"></span></span>
+        <strong class="num" x-text="`${Math.round(w.value * 100)}%`"></strong>
+      </div>
+    </template>
+  </div>
+  <ul>
+    <li><strong>Price</strong> — the all-in net estimate for your home. The cheapest eligible vendor scores 1, the most expensive 0.</li>
+    <li><strong>Rating</strong> — a Bayesian average of milestone reviews. New vendors start at the city average and move as reviews arrive (C = <span x-text="ratingC"></span>). Installation and long-term reviews count 1.5×; survey reviews 1×. Older reviews count less (half-life 12 months).</li>
+    <li><strong>Quote accuracy</strong> — the median gap between the estimate you saw and the vendor's final quote, over their last 20 quotes. Vendors with fewer than 3 quotes get a neutral score and are labelled "New — not enough data".</li>
+    <li><strong>Freshness</strong> — how recently the vendor updated their price sheet. Expired sheets are marked "prices may be outdated" and always ranked below current sheets, but never hidden.</li>
+  </ul>
+
+  <h2>Accuracy badges</h2>
+  <p><span class="badge badge-green">within ±10%</span> green · <span class="badge badge-amber">±10–20%</span> amber · <span class="badge badge-red">over ±20%</span> red · <span class="badge badge-new">New — not enough data</span></p>
+
+  <h2>Sponsored placement</h2>
+  <ul>
+    <li>At most <strong>one</strong> sponsored slot, shown above the list and labelled "Sponsored".</li>
+    <li>Only vendors with a current price sheet and a rating of at least <span x-text="sponsorMin"></span> can be sponsored.</li>
+    <li>The sponsored vendor <strong>also</strong> appears at its normal position. Sponsorship never changes the organic order, reviews or accuracy.</li>
+  </ul>
+
+  <h2>Eligibility</h2>
+  <p>A vendor appears only if they serve your pincode, install your system size, and have an available package in your chosen tier (a DCR package if you want the subsidy).</p>
+
+  <h2>Prices</h2>
+  <p>Every price is all-in: fixed charges (net-meter fee, paperwork, transport) are always included. The subsidy is computed by SolarSaral, not the vendor. Every estimate shown is logged and never edited. Indicative estimate from the vendor's price sheet; final price after site survey.</p>
+  <p><a href="#/review-policy">Read the review policy →</a></p>
+</div>

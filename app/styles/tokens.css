@@ -1,0 +1,66 @@
+/* Design tokens — the only place colours, type, spacing and radii are defined. */
+:root {
+  /* colour */
+  --c-bg: #f6f7f9;
+  --c-surface: #ffffff;
+  --c-surface-2: #f1f4f7;
+  --c-border: #dde3ea;
+  --c-border-strong: #c3ccd6;
+  --c-text: #15202b;
+  --c-muted: #56616e;
+  --c-faint: #7b8794;
+
+  --c-primary: #0a6b4f;
+  --c-primary-hover: #085a42;
+  --c-primary-soft: #e3f3ec;
+  --c-on-primary: #ffffff;
+
+  --c-sun: #f2a516;
+  --c-sun-soft: #fff4dc;
+  --c-sun-ink: #7a4d00;
+
+  --c-success: #067647;
+  --c-success-soft: #dcf5e8;
+  --c-warning: #9a4a00;
+  --c-warning-soft: #fff0d6;
+  --c-danger: #b42318;
+  --c-danger-soft: #fde7e5;
+  --c-info: #1f5fbf;
+  --c-info-soft: #e5efff;
+
+  --c-demo-bar: #1b2430;
+  --c-demo-ink: #e9eef4;
+  --c-focus: #1f6feb;
+
+  /* type */
+  --font: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, "SFMono-Regular", Consolas, monospace;
+  --fs-xs: 0.75rem;
+  --fs-sm: 0.875rem;
+  --fs-md: 1rem;
+  --fs-lg: 1.125rem;
+  --fs-xl: 1.375rem;
+  --fs-2xl: 1.75rem;
+  --fs-3xl: 2.25rem;
+  --lh: 1.5;
+
+  /* spacing */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 24px;
+  --sp-6: 32px;
+  --sp-7: 48px;
+
+  /* shape */
+  --radius-sm: 6px;
+  --radius: 12px;
+  --radius-lg: 16px;
+  --shadow-sm: 0 1px 2px rgba(16, 24, 40, 0.06);
+  --shadow: 0 1px 3px rgba(16, 24, 40, 0.08), 0 4px 12px rgba(16, 24, 40, 0.06);
+  --shadow-lg: 0 12px 32px rgba(16, 24, 40, 0.18);
+
+  --maxw: 1120px;
+  --tap: 44px;
+}

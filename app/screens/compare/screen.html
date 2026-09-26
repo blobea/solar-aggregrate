@@ -1,0 +1,53 @@
+<div>
+  <div class="page-head row-between">
+    <div>
+      <h1>Compare side by side</h1>
+      <p>All amounts are all-in. The subsidy is computed by SolarSaral, the same way for every vendor.</p>
+    </div>
+    <a class="btn btn-sm" href="#/results">← Back to results</a>
+  </div>
+
+  <template x-if="!cols.length && !loading">
+    <div class="empty">Pick 2–3 vendors on the results page to compare. <a href="#/results">Go to results</a></div>
+  </template>
+
+  <template x-if="cols.length">
+    <div class="stack">
+      <div class="table-wrap">
+        <table class="table compare-table" data-testid="compare-table">
+          <caption class="sr-only">Comparison of selected vendor estimates</caption>
+          <thead>
+            <tr>
+              <th scope="col">&nbsp;</th>
+              <template x-for="c in cols" :key="c.vendorId"><th scope="col" x-text="c.vendorName"></th></template>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">Net price range</th><template x-for="c in cols" :key="c.vendorId"><td class="num" :class="{ best: c.estimate.net === bestNet }" x-text="lakhRange(c.estimate.low, c.estimate.high)"></td></template></tr>
+            <tr><th scope="row">Net estimate</th><template x-for="c in cols" :key="c.vendorId"><td class="num" :class="{ best: c.estimate.net === bestNet }" x-text="inr(c.estimate.net)"></td></template></tr>
+            <template x-for="row in lineRows" :key="row.code">
+              <tr><th scope="row" class="small" x-text="row.label"></th>
+                <template x-for="c in cols" :key="c.vendorId"><td class="num" x-text="lineAmount(c, row.code)"></td></template></tr>
+            </template>
+            <tr><th scope="row">Gross (all-in)</th><template x-for="c in cols" :key="c.vendorId"><td class="num"><strong x-text="inr(c.estimate.gross)"></strong></td></template></tr>
+            <tr><th scope="row">Subsidy</th><template x-for="c in cols" :key="c.vendorId"><td class="num" x-text="'−' + inr(c.estimate.subsidy)"></td></template></tr>
+            <tr><th scope="row">Package</th><template x-for="c in cols" :key="c.vendorId"><td x-text="c.package.name"></td></template></tr>
+            <tr><th scope="row">Panels</th><template x-for="c in cols" :key="c.vendorId"><td class="small" x-text="c.package.panel + (c.package.panelWarrantyYears ? ` · ${c.package.panelWarrantyYears}-yr warranty` : '')"></td></template></tr>
+            <tr><th scope="row">Inverter</th><template x-for="c in cols" :key="c.vendorId"><td class="small" x-text="c.package.inverter + (c.package.inverterWarrantyYears ? ` · ${c.package.inverterWarrantyYears}-yr` : '')"></td></template></tr>
+            <tr><th scope="row">Workmanship warranty</th><template x-for="c in cols" :key="c.vendorId"><td x-text="`${c.workmanshipWarrantyYears} years`"></td></template></tr>
+            <tr><th scope="row">AMC (optional)</th><template x-for="c in cols" :key="c.vendorId"><td x-text="`${inr(c.amcPerYear)}/yr`"></td></template></tr>
+            <tr><th scope="row">Lead time</th><template x-for="c in cols" :key="c.vendorId"><td x-text="`${c.estimate.leadTimeDays} days`"></td></template></tr>
+            <tr><th scope="row">Payment</th><template x-for="c in cols" :key="c.vendorId"><td class="small" x-text="c.paymentMilestones"></td></template></tr>
+            <tr><th scope="row">Rating</th><template x-for="c in cols" :key="c.vendorId"><td><span class="stars" aria-hidden="true" x-text="stars(c.rating)"></span> <span x-text="`${c.rating.toFixed(1)} (${c.ratingCount})`"></span></td></template></tr>
+            <tr><th scope="row">Quote accuracy</th><template x-for="c in cols" :key="c.vendorId"><td><span class="badge" :class="badgeClass(c.accuracy.badge)" x-text="c.accuracy.label"></span></td></template></tr>
+            <tr><th scope="row">Price sheet</th><template x-for="c in cols" :key="c.vendorId"><td class="small" :style="c.stale ? 'color:var(--c-warning)' : ''" x-text="c.stale ? 'Expired — prices may be outdated' : `Updated ${daysAgo(c.updatedDaysAgo)}`"></td></template></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="disclaimer" x-text="disclaimer"></p>
+      <div class="row">
+        <a class="btn btn-primary" href="#/request" data-testid="compare-request">Request surveys from these vendors</a>
+      </div>
+    </div>
+  </template>
+</div>

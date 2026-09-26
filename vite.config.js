@@ -5,11 +5,11 @@ import { fileURLToPath } from 'node:url';
 const root = fileURLToPath(new URL('.', import.meta.url));
 
 export default defineConfig({
-  root: 'app',
+  root: fileURLToPath(new URL('./app', import.meta.url)),
   base: './',
   publicDir: false,
   build: {
-    outDir: '../dist',
+    outDir: fileURLToPath(new URL('./dist', import.meta.url)),
     emptyOutDir: true,
     chunkSizeWarningLimit: 1500,
   },

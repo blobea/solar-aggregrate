@@ -1,0 +1,58 @@
+<div style="max-width:680px;margin:0 auto">
+  <div class="page-head">
+    <h1 x-text="`Review: ${milestoneLabel}`"></h1>
+    <p x-show="lead" x-text="lead ? `${lead.vendorName} · the same checks apply to every review, positive or negative.` : ''"></p>
+  </div>
+  <template x-if="lead">
+    <form class="card card-lg" @submit.prevent="submit()" novalidate>
+      <template x-for="d in dims" :key="d">
+        <fieldset class="score-row" :data-testid="'dim-' + d">
+          <legend x-text="dimLabel(d)"></legend>
+          <div class="score-buttons">
+            <template x-for="n in [1,2,3,4,5]" :key="n">
+              <label>
+                <input type="radio" :name="'score-' + d" :value="n" :class="{ low: n <= 2 }" :checked="scores[d] === n" @change="scores[d] = n" :data-testid="`score-${d}-${n}`" />
+                <span x-text="n" :aria-label="`${n} out of 5`"></span>
+              </label>
+            </template>
+          </div>
+          <template x-if="scores[d] && scores[d] <= 2">
+            <div>
+              <label :for="'reason-' + d">What went wrong? (required)</label>
+              <select :id="'reason-' + d" x-model="reasons[d]" :data-testid="'reason-' + d">
+                <option value="">Choose a reason…</option>
+                <template x-for="(label, code) in reasonCodes" :key="code"><option :value="code" x-text="label"></option></template>
+              </select>
+              <div class="hint" x-show="['discom_delay','subsidy_portal_delay'].includes(reasons[d])">Shown on your review, but not counted against the vendor — it's outside their control.</div>
+            </div>
+          </template>
+        </fieldset>
+      </template>
+
+      <div class="field" style="margin-top:16px" x-show="milestone === 'install'">
+        <label for="evidence">Evidence (required): invoice number or photo</label>
+        <input id="evidence" type="text" x-model="evidence" placeholder="e.g. INV-2026-0142" data-testid="evidence" />
+        <div class="row" style="margin-top:8px">
+          <button class="btn btn-sm" type="button" @click="evidence = 'photo:installation.jpg (demo placeholder)'">Attach photo (demo)</button>
+          <span class="small muted" x-show="lead.invoiceNo" x-text="`Vendor's invoice: ${lead.invoiceNo}`"></span>
+        </div>
+      </div>
+      <div class="field" style="margin-top:16px" x-show="milestone === 'longterm'">
+        <label for="reading">Generation meter reading (kWh, required)</label>
+        <input id="reading" type="number" min="1" x-model.number="generationReading" />
+      </div>
+      <div class="field">
+        <label for="text">Anything else? (optional)</label>
+        <textarea id="text" x-model="text" maxlength="1000" data-testid="review-text"></textarea>
+      </div>
+      <div class="alert alert-danger" x-show="errors.length" role="alert">
+        <ul style="margin:0;padding-left:18px"><template x-for="e in errors" :key="e"><li x-text="e"></li></template></ul>
+      </div>
+      <p class="small muted">Reviews are published after a 72-hour check. Vendors can reply publicly or dispute on specific grounds; only our Ops team can remove a review.</p>
+      <div class="row-between">
+        <a class="btn" href="#/my-requests">Cancel</a>
+        <button class="btn btn-primary" type="submit" data-testid="submit-review">Submit review</button>
+      </div>
+    </form>
+  </template>
+</div>

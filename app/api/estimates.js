@@ -8,7 +8,7 @@ import { rulesSync, catalogueSync, catalogueItem, itemLabel } from './catalogue.
 import { latestSheets, vendorMetrics } from './metrics.js';
 import { getSession, currentCustomer } from './auth.js';
 import { estimate, resolveKw } from '../../engine/estimate.js';
-import { recommendKw } from '../../engine/sizing.js';
+import { recommendKw, billToUnits as billToUnitsEngine } from '../../engine/sizing.js';
 import { computeSavings } from '../../engine/savings.js';
 import { rankVendors } from '../../engine/ranking.js';
 import { median } from '../../engine/accuracy.js';
@@ -141,6 +141,16 @@ export async function previewSizing(config) {
   const sizing = recommendKw(config, rules);
   const kw = resolveKw(config, rules);
   return { sizing, kw, monthlyGeneration: Math.round(kw * rules.yieldPerKwDay * 30) };
+}
+
+/**
+ * Convert a monthly bill to units using the city tariff (fixed charge removed first).
+ * @param {number} amount ₹ @param {number} sanctionedLoadKw
+ */
+export async function billToUnits(amount, sanctionedLoadKw) {
+  await delay(0);
+  const { tariff } = rulesSync();
+  return billToUnitsEngine(Math.max(0, amount - tariff.fixedChargePerKw * (sanctionedLoadKw || 0)), tariff.slabs);
 }
 
 /** Ops: read-only estimates log, newest first. */

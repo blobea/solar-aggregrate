@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en-IN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0a6b4f" />
+  <meta name="description" content="Demo: compare all-in rooftop solar estimates from Bangalore vendors side by side. Sample data." />
+  <title>SolarSaral — compare rooftop solar in Bangalore (demo)</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='12' fill='%23f2a516'/%3E%3C/svg%3E" />
+</head>
+<body>
+  <a class="skip-link" href="#view">Skip to content</a>
+
+  <div x-data="shell" class="shell">
+    <div class="demo-bar" role="region" aria-label="Demo controls">
+      <span class="demo-label">Demo — sample data</span>
+      <label>
+        <span class="sr-only">Role</span>
+        <select data-testid="role-switcher" aria-label="Demo role" :value="$store.app.session.role" @change="switchRole($event.target.value)">
+          <option value="customer">Customer</option>
+          <option value="vendor">Vendor</option>
+          <option value="ops">Ops</option>
+        </select>
+      </label>
+      <label x-show="$store.app.session.role === 'vendor'" x-cloak>
+        <span class="sr-only">Vendor</span>
+        <select data-testid="vendor-switcher" aria-label="Acting as vendor" :value="$store.app.session.vendorId" @change="switchVendor($event.target.value)">
+          <template x-for="v in $store.app.vendors" :key="v.id">
+            <option :value="v.id" x-text="v.name" :selected="v.id === $store.app.session.vendorId"></option>
+          </template>
+        </select>
+      </label>
+      <button type="button" data-testid="open-demo-drawer" @click="$store.app.drawerOpen = true" aria-haspopup="dialog">Demo controls</button>
+    </div>
+
+    <header class="app-header">
+      <div class="app-header-inner">
+        <a class="brand" :href="homeHref()">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span>SolarSaral <small x-text="roleLabel()"></small></span>
+        </a>
+        <nav class="main-nav" aria-label="Main">
+          <template x-for="item in nav()" :key="item.href">
+            <a :href="item.href" x-text="item.label" :aria-current="isActive(item) ? 'page' : null"></a>
+          </template>
+        </nav>
+      </div>
+    </header>
+  </div>
+
+  <main id="view" tabindex="-1" aria-live="polite"></main>
+
+  <footer class="app-footer">
+    SolarSaral is a demo. All vendors, brands, prices and reviews are fictional sample data.
+    Prices are indicative estimates from each vendor's price sheet; final price after site survey.
+    SolarSaral never handles payments or installation.
+    <a href="#/how-we-rank">How we rank</a> · <a href="#/review-policy">Review policy</a>
+  </footer>
+
+  <div id="drawer-root"></div>
+
+  <div class="toasts" x-data aria-live="assertive">
+    <template x-for="t in $store.app.toasts" :key="t.id">
+      <div class="toast" :class="t.type" role="status" x-text="t.message"></div>
+    </template>
+  </div>
+
+  <script type="module" src="./main.js"></script>
+</body>
+</html>

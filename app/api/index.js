@@ -12,6 +12,7 @@ export * as reviews from './reviews.js';
 export * as vendors from './vendors.js';
 export * as sheets from './price-sheets.js';
 export * as demo from './demo.js';
+export * as drafts from './drafts.js';
 import './requests.js';
 
 export function initApi() {

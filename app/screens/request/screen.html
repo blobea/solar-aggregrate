@@ -1,0 +1,29 @@
+<div style="max-width:760px;margin:0 auto">
+  <div class="page-head">
+    <h1>Request site surveys</h1>
+    <p>Choose up to 3 vendors. Each will visit, check your roof and give a final quote. Surveys are free and there's no obligation.</p>
+  </div>
+  <form @submit.prevent="next()" class="stack">
+    <fieldset>
+      <legend x-text="`Vendors (${picked.length}/3 selected)`"></legend>
+      <div class="stack-sm">
+        <template x-for="c in list" :key="c.vendorId">
+          <label class="card check" :class="{ 'is-selected': picked.includes(c.vendorId) }" style="font-weight:400">
+            <input type="checkbox" :value="c.vendorId" :checked="picked.includes(c.vendorId)" @change="toggle(c.vendorId, $event)" :data-testid="'survey-' + c.vendorId" />
+            <span style="flex:1">
+              <strong x-text="c.vendorName"></strong>
+              <span class="small muted" x-text="` · ★ ${c.rating.toFixed(1)} · ${c.accuracy.label}`"></span><br />
+              <span class="small" x-text="`Net ${lakhRange(c.estimate.low, c.estimate.high)} · ${c.package.name}`"></span>
+              <span class="small" style="color:var(--c-warning)" x-show="c.stale"> · price sheet expired</span>
+            </span>
+          </label>
+        </template>
+      </div>
+    </fieldset>
+    <div class="error-text" x-show="error" x-text="error" role="alert"></div>
+    <div class="row-between">
+      <a class="btn" href="#/results">Back</a>
+      <button class="btn btn-primary" type="submit" data-testid="request-continue">Continue</button>
+    </div>
+  </form>
+</div>
