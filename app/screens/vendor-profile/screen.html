@@ -20,7 +20,7 @@
           <div class="stat-note"><span class="stars" aria-hidden="true" x-text="stars(v.metrics.rating)"></span> <span x-text="`${v.metrics.ratingCount} reviews`"></span></div></div>
         <div class="stat"><div class="stat-label">Quote accuracy</div>
           <div style="margin:6px 0"><span class="badge" :class="badgeClass(v.metrics.accuracy.badge)" data-testid="profile-accuracy" x-text="v.metrics.accuracy.label"></span></div>
-          <div class="stat-note" x-text="`Median of last ${v.metrics.accuracy.count} final quotes`"></div></div>
+          <div class="stat-note" data-testid="profile-accuracy-count" x-text="`Median of last ${v.metrics.accuracy.count} final quotes`"></div></div>
         <div class="stat"><div class="stat-label">Price sheet</div>
           <div class="stat-value" style="font-size:var(--fs-lg)" x-text="v.metrics.stale ? 'Expired' : 'Current'" :style="v.metrics.stale ? 'color:var(--c-warning)' : ''"></div>
           <div class="stat-note" x-text="`Updated ${daysAgo(v.metrics.updatedDaysAgo)}`"></div></div>

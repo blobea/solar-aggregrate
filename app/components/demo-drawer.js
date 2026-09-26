@@ -19,7 +19,8 @@ const TEMPLATE = /* html */ `
 
     <section class="stack-sm">
       <h3>Demo clock</h3>
-      <p class="small">Now: <strong x-text="clock"></strong></p>
+      <div class="row-between"><p class="small" style="margin:0">Now: <strong x-text="clock"></strong></p>
+        <button class="btn btn-sm" type="button" data-testid="skip-3-days" @click="skip(3)">+3 days</button></div>
     </section>
     <hr class="divider" />
 
@@ -109,6 +110,13 @@ export function mountDemoDrawer(root) {
       } catch (e) {
         Alpine.store('app').toast(String(/** @type {Error} */ (e).message), 'error');
       }
+    },
+    /** @param {number} days */
+    async skip(days) {
+      await demo.advanceTime(days);
+      this.clock = dateTime(demo.getClock());
+      Alpine.store('app').toast(`Clock moved forward ${days} days`);
+      rerender();
     },
     /** @param {boolean} on */
     async toggleSponsor(on) {
