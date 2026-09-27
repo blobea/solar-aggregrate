@@ -10,6 +10,8 @@ A neutral comparison platform for rooftop solar in Bangalore. Customers describe
 
 More screenshots are in [docs/screenshots](docs/screenshots).
 
+**Live demo:** https://blobea.github.io/solar-aggregrate/ — deployed by GitHub Pages on every push to `main` (`.github/workflows/deploy.yml`). Each visitor gets their own copy of the sample data in their browser.
+
 ## Run
 
 Requires Node.js 20+ (built with Node 24 LTS).
